@@ -1,0 +1,148 @@
+{
+  "actions": [
+    {
+      "action_id": "action-e8a2c5a487c380343d2e",
+      "kind": "preserve",
+      "memory_id": null,
+      "owner_scope": null,
+      "project_id": null,
+      "projection_effects": [],
+      "reason": "root contract is preserved as migration evidence",
+      "record_type": null,
+      "source_path": "AGENTS.md",
+      "source_sha256": "c92b09a3c58bc7176658fe6d41816b7eb7ca886849de26e582e7751ba183b13f",
+      "target_path": "AGENTS.md",
+      "unresolved_classification": null
+    },
+    {
+      "action_id": "action-612f3330563f0e03ba70",
+      "kind": "unresolved-proposal",
+      "memory_id": null,
+      "owner_scope": null,
+      "project_id": null,
+      "projection_effects": [],
+      "reason": "the same legacy fact appears beneath competing owner paths",
+      "record_type": null,
+      "source_path": "preferences/review-style.md",
+      "source_sha256": "2adbbb759faf4c50e7870fa5b2bcd48fb5e3220942ead11ce9f5a91d75e39403",
+      "target_path": null,
+      "unresolved_classification": "ambiguous-owner"
+    },
+    {
+      "action_id": "action-a6d2a9c1b7093f582ddf",
+      "kind": "unresolved-proposal",
+      "memory_id": null,
+      "owner_scope": null,
+      "project_id": null,
+      "projection_effects": [],
+      "reason": "the same legacy fact appears beneath competing owner paths",
+      "record_type": null,
+      "source_path": "projects/demo/sessions/2026-01-01-cache.md",
+      "source_sha256": "603a3701bb2e35feb8631a59c056366c9ae0418341cef064b801018cdf40cf68",
+      "target_path": null,
+      "unresolved_classification": "ambiguous-owner"
+    },
+    {
+      "action_id": "action-08abd43c55206132f42e",
+      "kind": "unresolved-proposal",
+      "memory_id": null,
+      "owner_scope": null,
+      "project_id": null,
+      "projection_effects": [],
+      "reason": "the same legacy fact appears beneath competing owner paths",
+      "record_type": null,
+      "source_path": "projects/demo/stories/cache.md",
+      "source_sha256": "93270763d556fd4e3fb04a9e43085448b2c8cf610e1d86b4e0b83547cf0364ba",
+      "target_path": null,
+      "unresolved_classification": "ambiguous-owner"
+    },
+    {
+      "action_id": "action-e2cb78b206a7dbd62b74",
+      "kind": "unresolved-proposal",
+      "memory_id": null,
+      "owner_scope": null,
+      "project_id": null,
+      "projection_effects": [],
+      "reason": "the same legacy fact appears beneath competing owner paths",
+      "record_type": null,
+      "source_path": "skills/rebuild-index.md",
+      "source_sha256": "1d09afcec3aba6cc61bb41fe99418de19182abdc4caf9289516cc2b57f99248c",
+      "target_path": null,
+      "unresolved_classification": "ambiguous-owner"
+    },
+    {
+      "action_id": "action-12d01a3e4adf5f867232",
+      "kind": "record",
+      "memory_id": "migr-session-demo-12d01a3e4adf",
+      "owner_scope": "project.demo.session",
+      "project_id": "demo",
+      "projection_effects": [
+        "_index/current-focus.md",
+        "_index/home.md",
+        "_index/memory-map.md",
+        "_index/stale-or-uncertain.md",
+        "projects/demo/current-focus.md",
+        "projects/demo/overview.md"
+      ],
+      "reason": "snapshot manifest supplies project migration chronology",
+      "record_type": "session",
+      "source_path": "snapshot.json",
+      "source_sha256": "8509fca82f5ace8e35379fb4a8dface971ecbd70381f01fb394f5ea49f501901",
+      "target_path": "_records/projects/demo/sessions/migr-session-demo-12d01a3e4adf--r0001.md",
+      "unresolved_classification": null
+    },
+    {
+      "action_id": "action-a97e3b9d4e85a0660452",
+      "kind": "record",
+      "memory_id": "migr-a97e3b9d4e85a0660452bba7",
+      "owner_scope": "meta.migration",
+      "project_id": null,
+      "projection_effects": [
+        "_index/home.md",
+        "_index/memory-map.md",
+        "_index/stale-or-uncertain.md"
+      ],
+      "reason": "snapshot manifest owns migration provenance only",
+      "record_type": "migration",
+      "source_path": "snapshot.json",
+      "source_sha256": "8509fca82f5ace8e35379fb4a8dface971ecbd70381f01fb394f5ea49f501901",
+      "target_path": "_records/meta/migrations/migr-a97e3b9d4e85a0660452bba7--r0001.md",
+      "unresolved_classification": null
+    }
+  ],
+  "actor": "fixture-agent",
+  "authorization_ref": null,
+  "created_at": "2026-09-04T00:00:00Z",
+  "findings": [
+    {
+      "code": "ambiguous-owner",
+      "message": "repeated legacy fact appears beneath competing owner paths",
+      "path": "preferences/review-style.md",
+      "severity": "warning"
+    },
+    {
+      "code": "ambiguous-owner",
+      "message": "repeated legacy fact appears beneath competing owner paths",
+      "path": "projects/demo/sessions/2026-01-01-cache.md",
+      "severity": "warning"
+    },
+    {
+      "code": "ambiguous-owner",
+      "message": "repeated legacy fact appears beneath competing owner paths",
+      "path": "projects/demo/stories/cache.md",
+      "severity": "warning"
+    },
+    {
+      "code": "ambiguous-owner",
+      "message": "repeated legacy fact appears beneath competing owner paths",
+      "path": "skills/rebuild-index.md",
+      "severity": "warning"
+    }
+  ],
+  "from_schema": 1,
+  "plan_id": "proposal-review-golden-plan",
+  "project_id_mappings": [],
+  "schema_version": 2,
+  "source_revision": "51095478fa3c9a9fbc9ce619c30ab780cd1c072712e0735b79f534a86ac9a967",
+  "to_schema": 2
+}

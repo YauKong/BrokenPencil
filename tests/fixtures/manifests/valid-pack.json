@@ -1,0 +1,69 @@
+{
+  "name": "obsidian-agent-memory-skill-pack",
+  "version": "2.0.0",
+  "minimum_python": "3.9",
+  "schema_versions": [
+    1,
+    2
+  ],
+  "active_members": [
+    "obsidian-agent-memory",
+    "obsidian-agent-memory-init",
+    "obsidian-agent-memory-route",
+    "obsidian-agent-memory-collaboration",
+    "obsidian-agent-memory-query",
+    "obsidian-agent-memory-add",
+    "obsidian-agent-memory-summary",
+    "obsidian-agent-memory-maintain",
+    "obsidian-agent-memory-upgrade"
+  ],
+  "removed_members": [
+    "obsidian-agent-memory-writer"
+  ],
+  "required_capabilities": [],
+  "optional_capabilities": [
+    "obsidian-cli",
+    "obsidian-knowledge-base"
+  ],
+  "release_archive": "obsidian-agent-memory-skill-pack-2.0.0.zip",
+  "release_checksum": "obsidian-agent-memory-skill-pack-2.0.0.zip.sha256",
+  "release_manifest": "obsidian-agent-memory-skill-pack-2.0.0-manifest.json",
+  "files": [
+    {
+      "path": "skills/obsidian-agent-memory-add/SKILL.md",
+      "sha256": "81333f5de0bccbb575834679ca0e5367fb5f29451cc42b2621566a5c82783114"
+    },
+    {
+      "path": "skills/obsidian-agent-memory-collaboration/SKILL.md",
+      "sha256": "7d3f18becb524533c7dfc2c653f15dd8a60c8bbd63ca7b03eff3cdede78fb85c"
+    },
+    {
+      "path": "skills/obsidian-agent-memory-init/SKILL.md",
+      "sha256": "282f78fcc7adc8d22fbbb91112c1195769ca45772747fa5d44b482af3d433df8"
+    },
+    {
+      "path": "skills/obsidian-agent-memory-maintain/SKILL.md",
+      "sha256": "9c49b268aa130afe872a3926b33698aeaacfafda13f323dd2101f00536858d81"
+    },
+    {
+      "path": "skills/obsidian-agent-memory-query/SKILL.md",
+      "sha256": "afb59c49ad0d4fd68aa32ea359e162fe12c4a207a2e638079c54b5b8600920f0"
+    },
+    {
+      "path": "skills/obsidian-agent-memory-route/SKILL.md",
+      "sha256": "ea4ba9657168a8395ade81743bb54d5e8631793858ee42b2f1a13b5d2f964acd"
+    },
+    {
+      "path": "skills/obsidian-agent-memory-summary/SKILL.md",
+      "sha256": "0fdf04d380d83ae65311459c9fa5abe6780f6c3ce803a089e3689605b50ac1b8"
+    },
+    {
+      "path": "skills/obsidian-agent-memory-upgrade/SKILL.md",
+      "sha256": "37130629fa78016232de0f323cbd8c59f60cedad81c827a35668894762c9eb0f"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/SKILL.md",
+      "sha256": "9e1631e664eac5c94072f30d46675796398ddd2a084b3546b942d2f49e5613eb"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "entries": [
+    {
+      "category": "contract",
+      "relative_path": "AGENTS.md",
+      "sha256": "c92b09a3c58bc7176658fe6d41816b7eb7ca886849de26e582e7751ba183b13f",
+      "size": 72
+    },
+    {
+      "category": "preference",
+      "relative_path": "preferences/review-style.md",
+      "sha256": "2adbbb759faf4c50e7870fa5b2bcd48fb5e3220942ead11ce9f5a91d75e39403",
+      "size": 100
+    },
+    {
+      "category": "session",
+      "relative_path": "projects/demo/sessions/2026-01-01-cache.md",
+      "sha256": "603a3701bb2e35feb8631a59c056366c9ae0418341cef064b801018cdf40cf68",
+      "size": 99
+    },
+    {
+      "category": "story",
+      "relative_path": "projects/demo/stories/cache.md",
+      "sha256": "93270763d556fd4e3fb04a9e43085448b2c8cf610e1d86b4e0b83547cf0364ba",
+      "size": 97
+    },
+    {
+      "category": "runbook",
+      "relative_path": "skills/rebuild-index.md",
+      "sha256": "1d09afcec3aba6cc61bb41fe99418de19182abdc4caf9289516cc2b57f99248c",
+      "size": 116
+    }
+  ],
+  "findings": [],
+  "generation": "v1",
+  "schema_version": 1,
+  "source_revision": "51095478fa3c9a9fbc9ce619c30ab780cd1c072712e0735b79f534a86ac9a967"
+}

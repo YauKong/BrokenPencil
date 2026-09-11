@@ -1,0 +1,27 @@
+{
+  "actor": "fixture-builder",
+  "desired": {
+    "observed_at": "2026-01-01T00:00:02Z",
+    "project_id": "demo",
+    "record_ids": [
+      "story-demo-cache"
+    ]
+  },
+  "expected_base": {
+    "focus_revision": 0
+  },
+  "focus_cas": {
+    "desired_revision": 1,
+    "desired_sha256": "916d73c18af3d2b0bd5c27fa47d34240abf788f0c62dfd59b80e95a8e611a2be",
+    "expected_revision": 0,
+    "expected_sha256": "66d84a3922f726141795daee58917e14ffffc6d7f278c1df35062e8f306ccc73",
+    "pending_name": ".pending-2fb9d0ee7b92bf3f6720bfa7efafa557d2909d931b93640fc08e381ab34151f1"
+  },
+  "focus_revision": 1,
+  "occurred_at": "2026-01-01T00:00:02Z",
+  "operation": "update_focus",
+  "schema_version": 2,
+  "status": "accepted",
+  "target": ".agent-memory/state/focus/demo.json",
+  "transaction_id": "fixture-v2-focus"
+}

@@ -1,0 +1,9 @@
+{
+  "observed_at": "2026-01-01T00:00:02Z",
+  "project_id": "demo",
+  "record_ids": [
+    "story-demo-cache"
+  ],
+  "revision": 1,
+  "schema_version": 2
+}

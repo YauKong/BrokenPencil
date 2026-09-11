@@ -1,0 +1,985 @@
+{
+  "active_members": [
+    "obsidian-agent-memory",
+    "obsidian-agent-memory-init",
+    "obsidian-agent-memory-route",
+    "obsidian-agent-memory-collaboration",
+    "obsidian-agent-memory-query",
+    "obsidian-agent-memory-add",
+    "obsidian-agent-memory-summary",
+    "obsidian-agent-memory-maintain",
+    "obsidian-agent-memory-upgrade"
+  ],
+  "files": [
+    {
+      "path": ".gitattributes",
+      "sha256": "d60f352d0db1404c70afb4bb8b2ca3fd1c610572aa40720e8a0b7baa7885418c"
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "a13611b2800f30d581439e2aa19d1c9af50da183be79a421922b990d3e89a1b1"
+    },
+    {
+      "path": "README.md",
+      "sha256": "e140862a8c6d68c746c4af6161b382571a501f0c3f5913422d3e37f58d2a9c10"
+    },
+    {
+      "path": "VERSION",
+      "sha256": "fe840f52fb5578d3f77eb497115eb02c6036601c3a53e60df7995c7276baa77a"
+    },
+    {
+      "path": "docs/release-and-authorization.md",
+      "sha256": "1604a1009d62067f207435657bff3a506fd78436e2f0ca560232b44c77e1835d"
+    },
+    {
+      "path": "docs/vault-migration-operations.md",
+      "sha256": "8ec68c16c426b445c4c60ff7bc9837111c952fd39a4ac6f1f4dbddc1221f2e02"
+    },
+    {
+      "path": "removal-profiles.json",
+      "sha256": "10f6fa2f3e0258f2ba2618eea9331d5b23b1dec3659ec04698145e2d7516101a"
+    },
+    {
+      "path": "skills/obsidian-agent-memory-add/SKILL.md",
+      "sha256": "ff72a81616f282f1db859577cc3e5127a98706511314e1c830cd5d6ff3760385"
+    },
+    {
+      "path": "skills/obsidian-agent-memory-collaboration/SKILL.md",
+      "sha256": "ddaeeb612fe44468e932a3ac68292fe6be5327349a45b212c2bba4ab47b0fa6d"
+    },
+    {
+      "path": "skills/obsidian-agent-memory-init/SKILL.md",
+      "sha256": "215ca821d6d8d33bc0aac706fdd97c4df189e389450763fddc524611823f2457"
+    },
+    {
+      "path": "skills/obsidian-agent-memory-maintain/SKILL.md",
+      "sha256": "ed628547cc7b5aff7073174e1c073c1a94a197dac6d3f685da170f46451f4447"
+    },
+    {
+      "path": "skills/obsidian-agent-memory-query/SKILL.md",
+      "sha256": "7b542fe87cc246f305d3646db60ae40dc2862bc40e6483dde00b22ca381db8a7"
+    },
+    {
+      "path": "skills/obsidian-agent-memory-route/SKILL.md",
+      "sha256": "452daa009eafcf301a49b6edc8eb61dcf9d1dda9dc499bbaf7074120682a2a15"
+    },
+    {
+      "path": "skills/obsidian-agent-memory-summary/SKILL.md",
+      "sha256": "3ee597935fb36b891263ffb0467303d5e3224e2f112c18d0f0731207d913c959"
+    },
+    {
+      "path": "skills/obsidian-agent-memory-upgrade/SKILL.md",
+      "sha256": "7d4dee205935c017a2bf1d5e082efd1ecd5868372eae8eee47c3a365bdffe0c1"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/SKILL.md",
+      "sha256": "c1cd7ea779b5247347b51d3d0cdf80bf50f9bbff938c3e3672458c6f5f75aaa9"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/references/configuration-and-path-discovery.md",
+      "sha256": "ec4065c0045695b8090ef27e5a1048419fc528401630af6dd872872723319e75"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/references/projection-contract.md",
+      "sha256": "ed1c06805b951d5118846b60b3b790009c3bbead23f2f1bb189db513dbdd3df2"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/references/proposal-review.md",
+      "sha256": "ff26332a9620c644bab0541ce993d4ca9d596150f91e706e4517ed02becb41ea"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/references/record-ownership.md",
+      "sha256": "9c130cc0956247bb1dfe2526d910627aab2ac54b36aab985e2fe352651fc9e61"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/references/retrieval-adapters.md",
+      "sha256": "f708130ebb170caabc2aa0ecb1b7c71339c73741d5a1cc217a3cfa6f999b882a"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/references/story-session-coordination.md",
+      "sha256": "9ab76f064b9de770070cf71b41fb68040a8d61091a6db4c6e13e4781d0379a76"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/references/v1-to-v2-migration.md",
+      "sha256": "45013268022d69e924a1f4d7855d1fdccc4b4a83a3628f29ad6c9bab3aa92998"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/references/validation-and-target-workstation.md",
+      "sha256": "5ccd4e790ceb526faca97785d4365b63afed4c8841c58e036c116259bb111650"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/references/vault-schema-2.md",
+      "sha256": "097f131755b97ef875edc4fa96aec0a6e2258a702b883d2fa33405ebb0834019"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/references/write-consistency.md",
+      "sha256": "48e4f78f7c49803220d6ee5658826e75df251d92cdd3a7cba49f4a418daa8cb3"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/__init__.py",
+      "sha256": "9c0fa643a55d6e5e8bcac9901cf39581e0990aadc874ccc6ec0f55a704275dec"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/adapters.py",
+      "sha256": "c0c661cba891277d354b943bdc02b99a862c7eddeb045aba0223c807fb78d985"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/artifact_schemas.py",
+      "sha256": "ee0b7eb356e4d42b7c434c17d438df00222490ee617f92a3cc8db3b00f0bfd81"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/catalog.py",
+      "sha256": "97e19a84974d4ad3e134376e68efb6326127691f335a2d2ca3495ce14bb5924b"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/cli_maintain.py",
+      "sha256": "270832c2a73fd6226517e870a41183fa61b1517a581a29d6ff4175e062ae046b"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/cli_migrate.py",
+      "sha256": "c10592fbb1ee9ead2bcd443f46db22734230554a98842a7d25967506c14492a6"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/config.py",
+      "sha256": "8fbcdf41ac42dcce5ad835c01051fd5d18384fcd0977bf7fa41f8010947dbecb"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/coordination.py",
+      "sha256": "70e7e5c2d50b2bd97917afba0811ffccd3f86e29612f87b4fc6a63614b835374"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/errors.py",
+      "sha256": "eb62bec522daaf434110a48174b4e5d74ff5833e2177920658247d4fc0daff13"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/maintenance.py",
+      "sha256": "490cd0a32b6f0813f8f129694668eec875f00485ab8faafa64a4f5229c5d8cf3"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/manifest.py",
+      "sha256": "94cb924b536ac6ed72d85d3732daf3b51bc443c3e2d958a48a45ae1e8e03aa03"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/migration.py",
+      "sha256": "d01fbeaa16f49a62de1ece52f925a66bcb8289900048f53f46685245594574c4"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/models.py",
+      "sha256": "c49f26b817e8c19cd92b341c436b0c41f82bd5c98c25345040c3d82f1080c350"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/operation_scope.py",
+      "sha256": "5ec1bba19be6e24a95943bb5dff7f75de77aa2bcf2eb45dd2720983f035f86db"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/paths.py",
+      "sha256": "3839bd0573525a86765507836cb1cd9240f24be7d6f37e26128c85d7a4a52f00"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/projections.py",
+      "sha256": "db0938dc9e5b54d70b263af816fa8e5780e9d77e6d55958e05b4f170cf76f0c0"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/proposal_decisions.py",
+      "sha256": "88c1d4bccb400f6404d907bd6836fbd905f6da7d361fbf74f140f5b96cc464df"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/proposal_resolution.py",
+      "sha256": "91c6d646441a014c3a0f4655621dd80d3db2001684805de7379627fc01276e0b"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/proposal_review.py",
+      "sha256": "2b17227051b70f15ca30263d8a8788153059598ded3e76775155406bf5e5e9e8"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/publication.py",
+      "sha256": "63ed5d0f3b572ee538dc413bca7cc0c2d6838b195e76294b17beb1b800d97a5f"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/records.py",
+      "sha256": "d3fa2196b788ae6798223c3c99339c72fa0d41802dce6a3eedf6584150703f55"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/resolution_outcomes.py",
+      "sha256": "d5c334e8a2af3dc8f66835b3ac6abf7f47fe88c7aa512f2cd9a15a524a6c9fb9"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/resolution_transactions.py",
+      "sha256": "f692c5abdfe6b0d1a1361918cf2627b7181dcd8bf9474426f51f6cec713f8516"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/rewrite_artifacts.py",
+      "sha256": "69c15cc0d7adc98fa174ce6c71bbca9bed3df84f56c3f695c6e3fd72e19a7072"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/rewrite_packet.py",
+      "sha256": "7e3adef50a6dd6ecd1da182a074db3a5979c6e4383e45bed50c2bc3ff3dd1844"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/runtime_identity.py",
+      "sha256": "16bf7dc012e39cb37b8c56c82310640d4074da970fb30899e9d3155fde922a51"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/session_relationships.py",
+      "sha256": "5522f8db3dc7f7e24e629c28d0d66c9df6486ef47e850867b75b5f4cc25eded5"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/story_profiles.py",
+      "sha256": "23f774f9eacc94e7a1ff4262dc5f306920aab9dc0257186b4e0c9b02b12b5fbe"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/transactions.py",
+      "sha256": "f787fb1adbf221cf9a0b3e8e77e83246879f067a28471bad4069232878c2eb4a"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/validation.py",
+      "sha256": "a6c6c05c26ce7413ac302e56137377b57642c7f0001b663b85bbc1072a0e807c"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/vault_maintain.py",
+      "sha256": "142146f6368100cc856cd4a92fc0d4ac9e53085f306691353469b5a66a6b05f4"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/scripts/vault_migrate.py",
+      "sha256": "ce26840bd06680552b07253b72dcae300e300f03e15d78c0f7229a549ae8a7d0"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/templates/decision-record.md",
+      "sha256": "485ec07acf83dcd868d4b7bb3ef098e7cace2b67812ed347e3d8b248b0b079d5"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/templates/maintenance-record.md",
+      "sha256": "15abbb842719b7e7d10a9d9300052d3ae04420865705fe64302c344ac65edeea"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/templates/migration-record.md",
+      "sha256": "44dfdee298175ee9d26d1c7b5a69af41ab19c2edf3006950d8c467441bf4cce1"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/templates/preference-record.md",
+      "sha256": "da8e0e2bdfadcc33c482961fe5a1aa8151a466cc6e808c9d726d8be440eb4da9"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/templates/runbook-record.md",
+      "sha256": "e386dd257b2b12cf9c78fb76b833fc3804895b16840cf4fabfbff7f5022bbafa"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/templates/session-record.md",
+      "sha256": "fb3ce0a7ba14655ccd2eabe5e02f27b7d505438e95b1423a0d7e7cd7df309e6a"
+    },
+    {
+      "path": "skills/obsidian-agent-memory/templates/story-record.md",
+      "sha256": "f327b15091555e55ce978a926ea452d2440119124309a36085658b66640506d9"
+    },
+    {
+      "path": "tests/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/fixture_builders.py",
+      "sha256": "83b7e380baa9ff72a3a6f9a60cba5010b2648c495fc99e299c796678ec30ae73"
+    },
+    {
+      "path": "tests/fixtures/manifests/valid-pack.json",
+      "sha256": "368e8f26c8dad6a3eac6d48c6bf8664ba30fe8b46cf97ab551490407c137507d"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/expected.json",
+      "sha256": "baf8376f0728768165a468b09f8da54bcce5e65aadedb16b6c68c05de40a0f6c"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/schema-1/detection.json",
+      "sha256": "1baa88d5488c0b7e547ca465a30e1cf4ade4183f601b12cfaa394b69ac262a32"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/schema-1/plan.json",
+      "sha256": "3d8c294b3c3386d579070cae42224d37625df48738bbf5c657241230d3f76ace"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/schema-1/snapshot.json",
+      "sha256": "8509fca82f5ace8e35379fb4a8dface971ecbd70381f01fb394f5ea49f501901"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/schema-1/snapshot/files/AGENTS.md",
+      "sha256": "c92b09a3c58bc7176658fe6d41816b7eb7ca886849de26e582e7751ba183b13f"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/schema-1/snapshot/files/preferences/review-style.md",
+      "sha256": "2adbbb759faf4c50e7870fa5b2bcd48fb5e3220942ead11ce9f5a91d75e39403"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/schema-1/snapshot/files/projects/demo/sessions/2026-01-01-cache.md",
+      "sha256": "603a3701bb2e35feb8631a59c056366c9ae0418341cef064b801018cdf40cf68"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/schema-1/snapshot/files/projects/demo/stories/cache.md",
+      "sha256": "93270763d556fd4e3fb04a9e43085448b2c8cf610e1d86b4e0b83547cf0364ba"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/schema-1/snapshot/files/skills/rebuild-index.md",
+      "sha256": "1d09afcec3aba6cc61bb41fe99418de19182abdc4caf9289516cc2b57f99248c"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/schema-2/detection.json",
+      "sha256": "1baa88d5488c0b7e547ca465a30e1cf4ade4183f601b12cfaa394b69ac262a32"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/schema-2/plan.json",
+      "sha256": "82e1a408fb453a21a0734509852db0556c97fa7db0a7b34246ad0ea3e28c8ef9"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/schema-2/snapshot.json",
+      "sha256": "8509fca82f5ace8e35379fb4a8dface971ecbd70381f01fb394f5ea49f501901"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/schema-2/snapshot/files/AGENTS.md",
+      "sha256": "c92b09a3c58bc7176658fe6d41816b7eb7ca886849de26e582e7751ba183b13f"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/schema-2/snapshot/files/preferences/review-style.md",
+      "sha256": "2adbbb759faf4c50e7870fa5b2bcd48fb5e3220942ead11ce9f5a91d75e39403"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/schema-2/snapshot/files/projects/demo/sessions/2026-01-01-cache.md",
+      "sha256": "603a3701bb2e35feb8631a59c056366c9ae0418341cef064b801018cdf40cf68"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/schema-2/snapshot/files/projects/demo/stories/cache.md",
+      "sha256": "93270763d556fd4e3fb04a9e43085448b2c8cf610e1d86b4e0b83547cf0364ba"
+    },
+    {
+      "path": "tests/fixtures/migration-bundles/proposal-review/schema-2/snapshot/files/skills/rebuild-index.md",
+      "sha256": "1d09afcec3aba6cc61bb41fe99418de19182abdc4caf9289516cc2b57f99248c"
+    },
+    {
+      "path": "tests/fixtures/proposal-resolution/packet-input/README.md",
+      "sha256": "794a85d4c6dd39004666f19895c52f5c598e2bb3a1d4aefd3c00624a1419bfdd"
+    },
+    {
+      "path": "tests/fixtures/reports/proposal-review-schema-1-minimal.json",
+      "sha256": "1a12b214ac0b5ffe35ce514d40e8db1d030a62e17accc9f81b70d70f2b483744"
+    },
+    {
+      "path": "tests/fixtures/reports/proposal-review-schema-1-minimal.sha256",
+      "sha256": "40f58e5cc2e8f090d3067c52614cd54b3c101b088aa0c25b20459c491717978f"
+    },
+    {
+      "path": "tests/fixtures/skill-trees/valid/skills/obsidian-agent-memory-add/SKILL.md",
+      "sha256": "81333f5de0bccbb575834679ca0e5367fb5f29451cc42b2621566a5c82783114"
+    },
+    {
+      "path": "tests/fixtures/skill-trees/valid/skills/obsidian-agent-memory-collaboration/SKILL.md",
+      "sha256": "7d3f18becb524533c7dfc2c653f15dd8a60c8bbd63ca7b03eff3cdede78fb85c"
+    },
+    {
+      "path": "tests/fixtures/skill-trees/valid/skills/obsidian-agent-memory-init/SKILL.md",
+      "sha256": "282f78fcc7adc8d22fbbb91112c1195769ca45772747fa5d44b482af3d433df8"
+    },
+    {
+      "path": "tests/fixtures/skill-trees/valid/skills/obsidian-agent-memory-maintain/SKILL.md",
+      "sha256": "9c49b268aa130afe872a3926b33698aeaacfafda13f323dd2101f00536858d81"
+    },
+    {
+      "path": "tests/fixtures/skill-trees/valid/skills/obsidian-agent-memory-query/SKILL.md",
+      "sha256": "afb59c49ad0d4fd68aa32ea359e162fe12c4a207a2e638079c54b5b8600920f0"
+    },
+    {
+      "path": "tests/fixtures/skill-trees/valid/skills/obsidian-agent-memory-route/SKILL.md",
+      "sha256": "ea4ba9657168a8395ade81743bb54d5e8631793858ee42b2f1a13b5d2f964acd"
+    },
+    {
+      "path": "tests/fixtures/skill-trees/valid/skills/obsidian-agent-memory-summary/SKILL.md",
+      "sha256": "0fdf04d380d83ae65311459c9fa5abe6780f6c3ce803a089e3689605b50ac1b8"
+    },
+    {
+      "path": "tests/fixtures/skill-trees/valid/skills/obsidian-agent-memory-upgrade/SKILL.md",
+      "sha256": "37130629fa78016232de0f323cbd8c59f60cedad81c827a35668894762c9eb0f"
+    },
+    {
+      "path": "tests/fixtures/skill-trees/valid/skills/obsidian-agent-memory/SKILL.md",
+      "sha256": "9e1631e664eac5c94072f30d46675796398ddd2a084b3546b942d2f49e5613eb"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-duplicate-owners/.agent-memory-fixture.json",
+      "sha256": "978449364c94ef0b7b99ec8aff35849cadce7eff8f8c94759f3055f95db28b5b"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-duplicate-owners/AGENTS.md",
+      "sha256": "fca37b51b980baa503e45a084a4818106d85688545b583bc4d2aecc1e3dcdf0b"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-duplicate-owners/preferences/cache.md",
+      "sha256": "5583eeebff060064d8e32a979e8691e35978fb84af9944d252218375d6b17042"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-duplicate-owners/projects/demo/sessions/2026-01-01-cache.md",
+      "sha256": "b88852de464622d8c3b01e1533b5c5b4140586fab7a01038fe0512df78677726"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-duplicate-owners/projects/demo/stories/cache.md",
+      "sha256": "c8d446c9a3b9fb59be1655f34347878e17a4aa1448bdcf78112e244a54628771"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-embedded-knowledge/.agent-memory-fixture.json",
+      "sha256": "43f18c4d05e7a6ce1e52fd605c116de431ac99f68eaf55ca1b263fb598148ab5"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-embedded-knowledge/AGENTS.md",
+      "sha256": "e430db028be56b6539d9dedbbee2d6863eeac870fb7673a9724f0e8e22a3fb49"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-embedded-knowledge/knowledge/modeling/retopology.md",
+      "sha256": "3f608bd570f4c5a716c2026e14ac5b65e2ee4b617f15802aec5aa812589cd7b0"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-embedded-knowledge/projects/demo/sessions/2026-01-01-source.md",
+      "sha256": "fb127649ff6273f6a24f36bc4fd15212c56a052feda9715d1e5f0e0286e5e50a"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-focus-drift/.agent-memory-fixture.json",
+      "sha256": "ce19ef5da24a6d6fd6d275fb97de21b0f6e736a086ba6343cb4e21a1bd770ba0"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-focus-drift/AGENTS.md",
+      "sha256": "44d61dce78d5c56fb881c93f305ba932c4ace71074dd2d361b209c4e598a516a"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-focus-drift/_index/current-focus.md",
+      "sha256": "60739081aae21c51774f3fec05c6099c4b3fa16af570a775cd174db30e6f7eb8"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-focus-drift/projects/demo/current-focus.md",
+      "sha256": "66e5b42c8c131faa77b53b74f204be21c7c863396ec14d36103e5ecc4b263ef6"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-focus-drift/projects/demo/stories/current-work.md",
+      "sha256": "5b144b71dc08e83046098eb2433906832aa40c9a2233d738829125e38f4ca978"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-minimal/.agent-memory-fixture.json",
+      "sha256": "ce8727660eea8021e434bb19aaaa6d031d3b4f60cafad937440b44486493832f"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-minimal/AGENTS.md",
+      "sha256": "10ce3b462b7337ca575511a0dd5b0d7a1d6c77409bae4f83732a7e52ff4438d2"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-minimal/_index/current-focus.md",
+      "sha256": "0773d7b0a8b71ad062581b03f0e0e3d66502f2a721da86c9d5dc447665660b70"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-minimal/_index/home.md",
+      "sha256": "58a59cbb7fe7ef94de57ae6dd1fa7e6dbbaad53a0d76489bb0a10ba02f4d4348"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-minimal/preferences/review-style.md",
+      "sha256": "03b06924d91da4ac0c778aceaf4215a26cccf0ec93a89a53aeb71be514cf317e"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-minimal/projects/demo/current-focus.md",
+      "sha256": "226a8a9ab89e91d9c5abc5004f300c9832eb4c45ddbb41df2c044387b83a873f"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-minimal/projects/demo/decisions/cache-policy.md",
+      "sha256": "cdd02e2b61bbb19b82f73cfa331b9da6581b8360498ab8fd3f3391e47b459905"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-minimal/projects/demo/overview.md",
+      "sha256": "749aca4ca4f03d1d3a8548a6b2d1aea45c5d2fde5e6d9eb40805446849880314"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-minimal/projects/demo/raw/source.txt",
+      "sha256": "949bf825913dc99679a96f60f44e0108664feab19f75423ec9b65d1cb80a02a4"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-minimal/projects/demo/sessions/2026-01-01-bootstrap.md",
+      "sha256": "70e307fcb81d3c3441b889a064b33db7b045cec75094e483a9fe78ef6df07494"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-minimal/projects/demo/stories/cache-failure.md",
+      "sha256": "9edb522320eca99daae19c30c9ca25f637cf035646edd6a4dadc6f8c9e10626b"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-minimal/skills/rebuild-index.md",
+      "sha256": "b495de61bf8486b7f16a76daf0d80822691c305945a0fa7a08d7603783bd4e29"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-partially-migrated/.agent-memory-fixture.json",
+      "sha256": "257155fd6d53eff28db2d671413fd662023d1245acae49be82ae19ad0db1c831"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-partially-migrated/.agent-memory/schema.json",
+      "sha256": "45424871e24c9c98586f913bbb5949692a5a92b4c4123b64d4f273ad45c6deac"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-partially-migrated/.agent-memory/state/catalog.json",
+      "sha256": "00b9dc3fc85b3fe0deda726203d1352bda6419bca4f3928bfb774ae808c5def1"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-partially-migrated/AGENTS.md",
+      "sha256": "d9d1e41c18ad283117a4a0bb9e500233a97b9c8b8e3568d512586f9b8d77cfa4"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-partially-migrated/_records/projects/demo/stories/story-demo-cache--r0001.md",
+      "sha256": "7269e9ea3129b535cdbe765deff4eb015a0b5c93a4ff5dc5bd2cd2802f425712"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-partially-migrated/projects/demo/current-focus.md",
+      "sha256": "6218d268bc15dc8435d7c52e2209e81f402807f1c206ee92f231ad93e6986caa"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-proposal-review-golden/.agent-memory-fixture.json",
+      "sha256": "471a21c0f11c0de04672b0b05b7476232d15a433a4c3de87e59c725bae970216"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-proposal-review-golden/AGENTS.md",
+      "sha256": "c92b09a3c58bc7176658fe6d41816b7eb7ca886849de26e582e7751ba183b13f"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-proposal-review-golden/preferences/review-style.md",
+      "sha256": "2adbbb759faf4c50e7870fa5b2bcd48fb5e3220942ead11ce9f5a91d75e39403"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-proposal-review-golden/projects/demo/sessions/2026-01-01-cache.md",
+      "sha256": "603a3701bb2e35feb8631a59c056366c9ae0418341cef064b801018cdf40cf68"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-proposal-review-golden/projects/demo/stories/cache.md",
+      "sha256": "93270763d556fd4e3fb04a9e43085448b2c8cf610e1d86b4e0b83547cf0364ba"
+    },
+    {
+      "path": "tests/fixtures/vaults/v1-proposal-review-golden/skills/rebuild-index.md",
+      "sha256": "1d09afcec3aba6cc61bb41fe99418de19182abdc4caf9289516cc2b57f99248c"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/.agent-memory-fixture.json",
+      "sha256": "27ea361309f12f3fb974dcfec8c40630e28aa1eee2df565f067ce5b4aa239133"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/.agent-memory-root-write.anchor",
+      "sha256": "2b83a6b4b69afa96a4fc53b5c34f1a4756435989bc9fbbaee40ae83d02ee9878"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/.agent-memory/config.json",
+      "sha256": "45424871e24c9c98586f913bbb5949692a5a92b4c4123b64d4f273ad45c6deac"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/.agent-memory/schema.json",
+      "sha256": "45424871e24c9c98586f913bbb5949692a5a92b4c4123b64d4f273ad45c6deac"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/.agent-memory/state/catalog.json",
+      "sha256": "00b9dc3fc85b3fe0deda726203d1352bda6419bca4f3928bfb774ae808c5def1"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/.agent-memory/state/focus/demo.json",
+      "sha256": "916d73c18af3d2b0bd5c27fa47d34240abf788f0c62dfd59b80e95a8e611a2be"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/.agent-memory/transactions/fixture-v2-focus.json",
+      "sha256": "a8b15f7cc2146d518eaf4aa82c98d061a90fd30291f6608ce253d94f8b33b7c1"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/.agent-memory/transactions/fixture-v2-init.json",
+      "sha256": "b1950abe323b6a08d9d5a55866a2c4320866b08e14af20429219dcc85afa8f76"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/.agent-memory/transactions/fixture-v2-story.json",
+      "sha256": "b95e0bcee1c9b140c81428bcba5c904be38d6a1e86d8a9a61c6e3110116df43f"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/AGENTS.md",
+      "sha256": "980bf1f5027b7236bb7b30aa57781e37b98746d0636226be43b158f041c3ede5"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/README.md",
+      "sha256": "75dbcceeac79790e62988866a96d4370c0434c97055c5c91ecef8b400391de5c"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/_index/current-focus.md",
+      "sha256": "deded91ab3bed80597625ff22fe9b6d52b5835debe26520491e198351b22654b"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/_index/home.md",
+      "sha256": "6888e707d6f66dccf16a7d3f6d67fb4457002e14e21c696c89428545aea66037"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/_index/memory-map.md",
+      "sha256": "ab1a8273aefcb6e881ca9f6adf1cddf9b1ccef89d562263e6a3dab56089e7076"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/_index/stale-or-uncertain.md",
+      "sha256": "a00ada2746ae9c3a7ee7461034605292b1f223892eba96fa441ee4accacbf5b4"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/_records/projects/demo/stories/story-demo-cache--r0001.md",
+      "sha256": "b0b282c4310b61c25ee0d896f4bb3fabc42982c313914b5ce49389a5ae21f188"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/projects/demo/current-focus.md",
+      "sha256": "5556f473a4585fb383feaa5f6e974231d90a00252fe9e75237e3ff8cd664bf97"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/projects/demo/overview.md",
+      "sha256": "001f508b25b1d4f3a46759cf4b96b58b48e1825e7a017e59619717b69da4a3be"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-clean/projects/demo/stories/story-demo-cache.md",
+      "sha256": "17b47b310efaf268b6f30945166e201ebd020871c86d3d998f679ec0f6b8c280"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-proposal-resolution/.agent-memory-fixture.json",
+      "sha256": "49068e32e35b0e2a8b0d8e796a62353cb5cb502f96c44ef093dc9b81300e1edb"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-proposal-resolution/AGENTS.md",
+      "sha256": "de0086e530319c5ff9868b193ee4fe0c7cec6c8411777dbdc0434333d9938f53"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-story-session-coordination/.agent-memory-fixture.json",
+      "sha256": "983ee285ecd1841e9526395e1473f3e94429bbbf1b63296f4f04364b81162622"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-story-session-coordination/AGENTS.md",
+      "sha256": "3aa3b25170b2fe6626e5cd2c2b317b6df0d67b2a1ac4cc63b7e14e973bf0608e"
+    },
+    {
+      "path": "tests/fixtures/vaults/v2-story-session-coordination/projects/demo/sessions/2026-09-01-legacy.md",
+      "sha256": "baa48b4338055025f062bb254d24476d9fa8546b1560e959eb43db4e023c01ac"
+    },
+    {
+      "path": "tests/helpers.py",
+      "sha256": "522e3ecac882bb6761bdad1ae3040d3ec40c06a205f3ba935508b24e4267b6a2"
+    },
+    {
+      "path": "tests/integration/__init__.py",
+      "sha256": "85689e8e3f64df25382245baefd0b02461e7b211bd278e94c978771f0f2588ca"
+    },
+    {
+      "path": "tests/integration/test_concurrent_projections.py",
+      "sha256": "d7c71a2a10b5048f3d02357c4ba0d35b3931c2869ad7085855c5c9a6fd0f7a52"
+    },
+    {
+      "path": "tests/integration/test_concurrent_transactions.py",
+      "sha256": "02c63531377ce4c97a5c259889a4672be607f861f819331e177a6e8e3491c2cf"
+    },
+    {
+      "path": "tests/integration/test_core_workflow.py",
+      "sha256": "740599937cbd9daf9eccb8ed5017a4eb51a1a4c0dc0d70e2e215f44a09add37b"
+    },
+    {
+      "path": "tests/integration/test_pack_end_to_end.py",
+      "sha256": "b6c70e5178e5eb08eeceb4530f2e3e0832273765905e39649e05142b519e2d78"
+    },
+    {
+      "path": "tests/integration/test_proposal_resolution_workflow.py",
+      "sha256": "4819b35bf977a88db31c3ba3e7cad3dc8c43e1ead0dc4c7599fbaef5f0be0324"
+    },
+    {
+      "path": "tests/integration/test_proposal_review_workflow.py",
+      "sha256": "b30d03f1d7b00fa98e4b999fdbfbf638b6434d4c25cfee389dc2ca9301b8ee8d"
+    },
+    {
+      "path": "tests/integration/test_story_session_coordination_workflow.py",
+      "sha256": "bc475be16609d2fc4c8f47b8739c47229d9d78299ec138009bbbe68a9581de85"
+    },
+    {
+      "path": "tests/integration/test_vault_migration_workflow.py",
+      "sha256": "02630e657bed617d94008c98c81f46b5c21a556cd2afc4fc770de2d0cbc0dabe"
+    },
+    {
+      "path": "tests/portability.py",
+      "sha256": "2ac607fca06b677d09f76845e2f67a921047debc77d53ff2dd1b9f37260bde8a"
+    },
+    {
+      "path": "tests/probes/fixture_import_precedence.py",
+      "sha256": "16647a3519ca478b5253353f0b4bd0b6228097d8d47fc8c01d9409d88676b009"
+    },
+    {
+      "path": "tests/proposal_resolution_helpers.py",
+      "sha256": "8ecbbaf96fce888dde05b819c86b6c809e1427c988bdd66e048fe99845d06531"
+    },
+    {
+      "path": "tests/unit/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/unit/test_adapters.py",
+      "sha256": "623f488ba5f757e60217f37d87a6504c6ea799097a4e2ba494f6891eaac578bc"
+    },
+    {
+      "path": "tests/unit/test_artifact_schemas.py",
+      "sha256": "4d2a7f1c8928d3787db37756ead52bdf1b817cc19256327fea953c46c292e89f"
+    },
+    {
+      "path": "tests/unit/test_config_paths.py",
+      "sha256": "b65c6157617c88e87e09529263122031f04c0a69e4cd6402aa178a4da119bb50"
+    },
+    {
+      "path": "tests/unit/test_coordination.py",
+      "sha256": "08c41a19a3ea5693a1b96c57dc2e6030ad9655b3331281056e486872384ccbfc"
+    },
+    {
+      "path": "tests/unit/test_doctor.py",
+      "sha256": "a2ae5e8f7668c1af243143b53e4dbae8a96fb57ca4beed386c05c68401932244"
+    },
+    {
+      "path": "tests/unit/test_focus_projections.py",
+      "sha256": "e3811e67b5aee3733fda47109236822ab695fcc48b6c26b46efacb864092c1de"
+    },
+    {
+      "path": "tests/unit/test_install_lifecycle.py",
+      "sha256": "a386fe7b17c157679cae2c584f8d239ad24eadfdc9df51a6d3861eb45ddadfc0"
+    },
+    {
+      "path": "tests/unit/test_maintenance.py",
+      "sha256": "ed4d2b7466d1b14e15a041123eb02ddf232b5a487017d3b50a262811c938ba6a"
+    },
+    {
+      "path": "tests/unit/test_manifest_validation.py",
+      "sha256": "7c2fded21d431e7af600177263d4955ee95d7a207cda604c2d0266c113a11494"
+    },
+    {
+      "path": "tests/unit/test_migration_apply.py",
+      "sha256": "8d720d079994387cf867ad29d91973f70d49a7b6495e0c9033efb4113c0e6183"
+    },
+    {
+      "path": "tests/unit/test_migration_bundle_compatibility.py",
+      "sha256": "9c6a7ae2b03e4b3779b517cec575aa6e015f8ae6c77849e5ce28b9bd2da543aa"
+    },
+    {
+      "path": "tests/unit/test_migration_detection.py",
+      "sha256": "bb08b27fd75dc921cd02cbbf3998df1bc40bf6e5686000f3aa37f447eb240987"
+    },
+    {
+      "path": "tests/unit/test_migration_planning.py",
+      "sha256": "cc2266326643dcb6e9eceb8e59c377783ced1193554f0b0ce12efccfdec2d750"
+    },
+    {
+      "path": "tests/unit/test_models.py",
+      "sha256": "bab38365493e28d8bed80eb6d7254bd4fc1786d1126d5cd76a9886d316684b27"
+    },
+    {
+      "path": "tests/unit/test_operation_scope.py",
+      "sha256": "a5d8346b74190dc6b1303b2ccb7303bb31ef80f9f835fd4d20f9fad9bac74c7a"
+    },
+    {
+      "path": "tests/unit/test_proposal_decisions.py",
+      "sha256": "81c7c87951d3d3d64280fb858ddd84e0d121c4634f19a5c45fe67c38cad57ec9"
+    },
+    {
+      "path": "tests/unit/test_proposal_resolution_apply.py",
+      "sha256": "ab6702667c47addc5323a18fe37f0c30051d852a5a4c323a41e4bbc74969d52c"
+    },
+    {
+      "path": "tests/unit/test_proposal_resolution_cli.py",
+      "sha256": "c0b3a6d5dc78c335fc900827a081d802d69bd6ea890a47280047f5426acfe3f2"
+    },
+    {
+      "path": "tests/unit/test_proposal_resolution_planning.py",
+      "sha256": "71e51073ff065ee2d4cc0f9fdb5e313a2f2225de231a7ecd5e84b3810834fd67"
+    },
+    {
+      "path": "tests/unit/test_proposal_resolution_recovery.py",
+      "sha256": "bc7e00f8ea28839a8be6c0357bb1666e1855e1cdb22007d7e09c94a5b243c182"
+    },
+    {
+      "path": "tests/unit/test_proposal_resolution_verification.py",
+      "sha256": "ac8a7b313311ada95f0bcf0089a152f33a6330836ba0cd957370daf3bff13d23"
+    },
+    {
+      "path": "tests/unit/test_proposal_review_binding.py",
+      "sha256": "f85c854cd9933ac7bc37bf36b8719fd13dddd5e0967b07fd6e30a34c69d5d890"
+    },
+    {
+      "path": "tests/unit/test_proposal_review_companion.py",
+      "sha256": "609265a3fbaf8e4b0eed5516e5beef009f7d82650982a6f70125a5626e330b86"
+    },
+    {
+      "path": "tests/unit/test_proposal_review_parser.py",
+      "sha256": "72c02b1aef2bba299e4eb3afbe45e643dbd8a96923e959bd2ea7a144278f1346"
+    },
+    {
+      "path": "tests/unit/test_proposal_review_report.py",
+      "sha256": "c60479cd16b3db9360d0d71f3ca437a58202e16abfbdf975dc01b2a4b88c227a"
+    },
+    {
+      "path": "tests/unit/test_records.py",
+      "sha256": "ffbca46877fb1eeaa0611c0a0810105993712ef06041663325b659c184526fad"
+    },
+    {
+      "path": "tests/unit/test_release_archive.py",
+      "sha256": "98219f3071f40f054b2451483cedd998dca794ba2ac3329a0fad82fff2aa2f3c"
+    },
+    {
+      "path": "tests/unit/test_release_documentation.py",
+      "sha256": "b9ab43e18c2a1548eb3b64c43f0e646d67989543de32c1229d672c0f080fa145"
+    },
+    {
+      "path": "tests/unit/test_release_metadata.py",
+      "sha256": "0e6decfc8c81bb943d9475ba5b148c8bf6807d8e079a9592c7f8bf6271855593"
+    },
+    {
+      "path": "tests/unit/test_release_version_compatibility.py",
+      "sha256": "ac7e98527a48caf6fe081bec1f571be6474f6c46ebfd3dbed49331d5904a4ff1"
+    },
+    {
+      "path": "tests/unit/test_resolution_visibility.py",
+      "sha256": "147cbf2f6ec78260392e3d0a5e7a9c9df0694c5cf77c0e9f318d23ad648d0042"
+    },
+    {
+      "path": "tests/unit/test_rewrite_artifacts.py",
+      "sha256": "42fdbfaadabf64e344ae83db5d2f13363360a94da32dc5bb0efc63df40cb1c2e"
+    },
+    {
+      "path": "tests/unit/test_rewrite_packet.py",
+      "sha256": "0b92336f67e7dfa8f6fff5839a2ef2fbe3fcae52c4b7b16cad6dab559cf5a2f6"
+    },
+    {
+      "path": "tests/unit/test_runtime_identity.py",
+      "sha256": "aa9fe9bba2b529b2d058cb0461a198f68421c6af0dcb39ab530e8a20c8d49d6f"
+    },
+    {
+      "path": "tests/unit/test_session_relationships.py",
+      "sha256": "d893bfe0a1f55168098055f2cda995c1ec5dadc54221c67f505d6a4fe6cea430"
+    },
+    {
+      "path": "tests/unit/test_skill_family_static.py",
+      "sha256": "82517492d9a89ea11de04b7902b79edf8f9a475de835392a2f439f53f337fc11"
+    },
+    {
+      "path": "tests/unit/test_skill_root_resolution.py",
+      "sha256": "482c89fbb3bf797eca8da240618da854d848943f3e979a13419a5b2e0a7b632d"
+    },
+    {
+      "path": "tests/unit/test_story_profiles.py",
+      "sha256": "20d639dc2de5968242e895c1a5ba1be6be15510f79f6da875b3efa7867b52be4"
+    },
+    {
+      "path": "tests/unit/test_transactions.py",
+      "sha256": "8695fe7d5b15ae39330dbb1674bf7f2a0613e19a145126e13414fb3faf4c9be9"
+    },
+    {
+      "path": "tests/unit/test_uninstall_lifecycle.py",
+      "sha256": "80d2485f75d2d5135f9e73d45d803a61b965fe4414e18503501954a7691d6e85"
+    },
+    {
+      "path": "tests/unit/test_vault_fixtures.py",
+      "sha256": "6697bcf6768d5d3ee29f422aba1f6eee89710afc5dff3934094c70952daa7d1c"
+    },
+    {
+      "path": "tests/unit/test_vault_tool_commands.py",
+      "sha256": "e4073e870608e38ce8cbdd208bb3fba269a0c09f248348e1060bce1ee4b70a66"
+    },
+    {
+      "path": "tools/__init__.py",
+      "sha256": "cf60697677cd84a6219678ca09f21f2a57de7bb1b83dfd9abe630838193b631a"
+    },
+    {
+      "path": "tools/_bootstrap.py",
+      "sha256": "15719ed65c745058cf718ad6c289bac380eebf5f98ee947502d2666fdeebdf77"
+    },
+    {
+      "path": "tools/agent_memory_pack/__init__.py",
+      "sha256": "575f96834ac67fec25216ab727da964dbdbcd2ebe851f0578745daedaf14147e"
+    },
+    {
+      "path": "tools/agent_memory_pack/doctor.py",
+      "sha256": "8aa12c75d58aa5aeafa3620750d7ab071ba25221e7adb3f9de1af14483486829"
+    },
+    {
+      "path": "tools/agent_memory_pack/installed_fixture.py",
+      "sha256": "529e9668bf3a00018b810002402117e57741d1f27ae2acb2b304f4c7b75e3b2a"
+    },
+    {
+      "path": "tools/agent_memory_pack/io.py",
+      "sha256": "9ac9dffee40355904cdb32555c1b1101951a147acaa7201d944b0266bcbe46e3"
+    },
+    {
+      "path": "tools/agent_memory_pack/lifecycle.py",
+      "sha256": "8e0309b7be2a44eceaa9b5e89542daddfc8080bf8b4c97dd1a5415e94a711a28"
+    },
+    {
+      "path": "tools/agent_memory_pack/metadata.py",
+      "sha256": "6210f99aa6b2f82ffd2f1d3aced5707dbcc9a0bac2f73236f9e3ddf0d05e526c"
+    },
+    {
+      "path": "tools/agent_memory_pack/models.py",
+      "sha256": "c23bd9ede19957cea71ea8010d93b5401aa1b8e69e6aee728f9231d08c7455a6"
+    },
+    {
+      "path": "tools/agent_memory_pack/release.py",
+      "sha256": "b4515094fa60d8483d0508dc2aa7803547f5a9311f5caea308df907e7a4db4f3"
+    },
+    {
+      "path": "tools/agent_memory_pack/roots.py",
+      "sha256": "59341c75b3389df9cfef301ea07e158cb5f1c6ce21de13b6cbebefdbd4d0bd4d"
+    },
+    {
+      "path": "tools/agent_memory_pack/smoke.py",
+      "sha256": "91d9ecb8d333201aaa0f1cf9d37066868e46b1e335034746d308f07ae786387d"
+    },
+    {
+      "path": "tools/bootstrap.py",
+      "sha256": "8829076aa3cbaebc03c594aeafd9fbc32cd2b7be0138cc44606b89d2e89494d8"
+    },
+    {
+      "path": "tools/build_release.py",
+      "sha256": "fd6a3166050950a8c1b1bbfc6a436ea9d813f5c0d92ff84a463ef1582b506a59"
+    },
+    {
+      "path": "tools/doctor.py",
+      "sha256": "14c532c67c01bbfb66384538d507518508b2a57033aa5acd2cf0e95e07cbb3cf"
+    },
+    {
+      "path": "tools/install_pack.py",
+      "sha256": "4a5f21f73c2568f80b28d3e9007c409a2c89520eaebb1bd18c2b27c8f469f0d5"
+    },
+    {
+      "path": "tools/refresh_manifest.py",
+      "sha256": "c200949efb3b61b6afb3482510c159108e79395d01a81517374cc1dfcf8961f1"
+    },
+    {
+      "path": "tools/smoke.py",
+      "sha256": "81b6e745683f7204ee8b9658fb1bd5c1014779ef2778df37dfa7671a6ea258cd"
+    },
+    {
+      "path": "tools/uninstall_pack.py",
+      "sha256": "05d8ece02c3c075a090c1242a1922aad74399366490a0faf9fdfc7d720c5cc89"
+    },
+    {
+      "path": "tools/validate.py",
+      "sha256": "19c5a293033e756159f267842aaa6b42ae6e463fec4a1e0106d5ef697ff8e3b1"
+    },
+    {
+      "path": "tools/vault_maintain.py",
+      "sha256": "42aadaec3a555fae8d670e9658036f8f0c1eb5c73c7f68e1bd54fecc8a2b835d"
+    },
+    {
+      "path": "tools/vault_migrate.py",
+      "sha256": "14ee4673756ddc6be7c4b648c2086ae87c121febf89109088294a75d2a1303e3"
+    },
+    {
+      "path": "tools/verify_release.py",
+      "sha256": "f6883d98a23e423521d6bc664cd479e82c86650bdcb238380ac6ff7206955d9d"
+    }
+  ],
+  "minimum_python": "3.9",
+  "name": "obsidian-agent-memory-skill-pack",
+  "optional_capabilities": [
+    "obsidian-cli",
+    "obsidian-knowledge-base"
+  ],
+  "release_archive": "obsidian-agent-memory-skill-pack-2.0.1.zip",
+  "release_checksum": "obsidian-agent-memory-skill-pack-2.0.1.zip.sha256",
+  "release_manifest": "obsidian-agent-memory-skill-pack-2.0.1-manifest.json",
+  "removed_members": [
+    "obsidian-agent-memory-writer"
+  ],
+  "required_capabilities": [],
+  "schema_versions": [
+    1,
+    2
+  ],
+  "version": "2.0.1"
+}

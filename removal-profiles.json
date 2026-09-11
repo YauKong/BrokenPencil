@@ -1,0 +1,108 @@
+{
+  "profiles": [
+    {
+      "directories": [
+        "obsidian-agent-memory",
+        "obsidian-agent-memory-add",
+        "obsidian-agent-memory-collaboration",
+        "obsidian-agent-memory-init",
+        "obsidian-agent-memory-maintain",
+        "obsidian-agent-memory-query",
+        "obsidian-agent-memory-route",
+        "obsidian-agent-memory-summary",
+        "obsidian-agent-memory-upgrade",
+        "obsidian-agent-memory-writer",
+        "obsidian-agent-memory-writer/agents",
+        "obsidian-agent-memory-writer/scripts",
+        "obsidian-agent-memory/designs",
+        "obsidian-agent-memory/plans",
+        "obsidian-agent-memory/references",
+        "obsidian-agent-memory/scripts"
+      ],
+      "files": [
+        {
+          "path": "obsidian-agent-memory-add/SKILL.md",
+          "sha256": "b8f7c28fef2d396100287a2557fd4413eff6881eb229df7feaea86c9165bec9d"
+        },
+        {
+          "path": "obsidian-agent-memory-collaboration/SKILL.md",
+          "sha256": "1a73b2a600ff336248741145743c531e4602fd2d0863ade458990e600809291c"
+        },
+        {
+          "path": "obsidian-agent-memory-init/SKILL.md",
+          "sha256": "f226988c25a66332b648018efe055a065e1f1ba60c340a2752681190a478ec31"
+        },
+        {
+          "path": "obsidian-agent-memory-maintain/SKILL.md",
+          "sha256": "1be3e82ce39859c95c4d12eab86e68e5efbd60708fcf9ae8ef106a463522fefc"
+        },
+        {
+          "path": "obsidian-agent-memory-query/SKILL.md",
+          "sha256": "ac449140365cbb52cb6c2d10f721ee50f098d7e4ddbb20a100fc38e54ace2348"
+        },
+        {
+          "path": "obsidian-agent-memory-route/SKILL.md",
+          "sha256": "18fe176f75e1fac63f76d9eadd46c3bd861dd9f0e9165b31e03338f69b26de9a"
+        },
+        {
+          "path": "obsidian-agent-memory-summary/SKILL.md",
+          "sha256": "39d37a6840b598c264ca0cb7d8fb5e0208f6deae374a44f30f78a13b53ddb8a0"
+        },
+        {
+          "path": "obsidian-agent-memory-upgrade/SKILL.md",
+          "sha256": "f216ce285d0a94f1e00fad7019f44ba810bd00cd8a1bf81d43c2dffccc85924b"
+        },
+        {
+          "path": "obsidian-agent-memory-writer/SKILL.md",
+          "sha256": "a81e4a99edfa939d8b733d7528b30e591da8605409055dd06933bf667ed7c0c2"
+        },
+        {
+          "path": "obsidian-agent-memory-writer/agents/openai.yaml",
+          "sha256": "634fae20b5526dbca8458f480e9c2d758204bd1a6e0deb53d2c653e4d6bacf9c"
+        },
+        {
+          "path": "obsidian-agent-memory-writer/scripts/create_session_summary.py",
+          "sha256": "dda64e7798b523ee2c3d8861fc79d8d1f1ba74cefdfa9437449caf2dac930b19"
+        },
+        {
+          "path": "obsidian-agent-memory/SKILL.md",
+          "sha256": "ad80787eaececae75c03d91193c92ab0ac2ace603633ca84a17f31fbb2b5225c"
+        },
+        {
+          "path": "obsidian-agent-memory/designs/2026-08-03-collaboration-skill-design.md",
+          "sha256": "1e8db536a6db78aeb5844e71a6ab93cec8e1ffd4b14f2154b2c51b740400696e"
+        },
+        {
+          "path": "obsidian-agent-memory/designs/2026-08-03-collaboration-skill-tdd.md",
+          "sha256": "d3a9d7b489f475d1f51d2e40ef74ad9b50b9657cb260dae363d6bbbf5c6543d6"
+        },
+        {
+          "path": "obsidian-agent-memory/plans/2026-08-03-collaboration-skill.md",
+          "sha256": "73cd9203e4b61b51130568b26c1e7b9f1077118c33a61e9ed504c16d5646730b"
+        },
+        {
+          "path": "obsidian-agent-memory/references/project-story-template.md",
+          "sha256": "c2de48f6b5261b7e3a608b8fa0f483baa2870176487d20a87da2adfa87ca80b6"
+        },
+        {
+          "path": "obsidian-agent-memory/references/schema.md",
+          "sha256": "827535ac70941bfbc76bed20cd86dea2a6eabdfd7f6f356821a8b3c52c42bf67"
+        },
+        {
+          "path": "obsidian-agent-memory/references/session-template.md",
+          "sha256": "c7a8b343fbc24629e89897b992af21e3d40dd97103d9bdff5c7523521335441b"
+        },
+        {
+          "path": "obsidian-agent-memory/references/source-priority.md",
+          "sha256": "b45c334a512f1de85a61c54926b77785ae6dad17fcb159072a3cb515de2bfbab"
+        },
+        {
+          "path": "obsidian-agent-memory/scripts/create_session_summary.py",
+          "sha256": "dda64e7798b523ee2c3d8861fc79d8d1f1ba74cefdfa9437449caf2dac930b19"
+        }
+      ],
+      "profile_id": "installed-unmanaged-v1-2026-08-30"
+    }
+  ],
+  "schema_version": 1
+}

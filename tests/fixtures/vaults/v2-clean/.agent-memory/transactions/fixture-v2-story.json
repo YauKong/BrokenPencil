@@ -1,0 +1,46 @@
+{
+  "actor": "fixture-builder",
+  "catalog_cas": {
+    "desired_revision": 1,
+    "desired_sha256": "00b9dc3fc85b3fe0deda726203d1352bda6419bca4f3928bfb774ae808c5def1",
+    "expected_revision": 0,
+    "expected_sha256": "452b85d683a86e8850ec7e4be96755f7ed1d8f83fd2703d4c0f094120d18b8a4",
+    "pending_name": ".pending-d520376879289810fa6bf0da4f71dd00671506514cdb25beaee7a593a37b0406"
+  },
+  "catalog_revision": 1,
+  "desired": {
+    "memory_id": "story-demo-cache",
+    "record_candidate": {
+      "body": "# Demo cache story\n\nThe asset cache is enabled for fictional previews.\n",
+      "envelope": {
+        "body_sha256": "e8ceb128d26dd2b09eb5e9b051f858c573fe2011daa2986191a5b157211b709c",
+        "created_at": "2026-01-01T00:00:01Z",
+        "memory_id": "story-demo-cache",
+        "observed_at": "2026-01-01T00:00:01Z",
+        "owner_scope": "project.demo.story",
+        "project": "demo",
+        "record_type": "story",
+        "revision": 1,
+        "schema_version": 2,
+        "source": "fixture-source",
+        "source_revision": "fixture-source-r1",
+        "supersedes": null
+      }
+    },
+    "record_candidate_sha256": "8844eeeb6d41be574f5b6579d14339ae251a513268531110b80475bbe737ff12",
+    "record_revision": 1,
+    "record_sha256": "b0b282c4310b61c25ee0d896f4bb3fabc42982c313914b5ce49389a5ae21f188",
+    "relative_path": "_records/projects/demo/stories/story-demo-cache--r0001.md"
+  },
+  "expected_base": {
+    "catalog_revision": 0,
+    "record_revision": null
+  },
+  "occurred_at": "2026-01-01T00:00:01Z",
+  "operation": "commit-record",
+  "record_path": "_records/projects/demo/stories/story-demo-cache--r0001.md",
+  "schema_version": 2,
+  "status": "accepted",
+  "target": "_records/projects/demo/stories/story-demo-cache--r0001.md",
+  "transaction_id": "fixture-v2-story"
+}

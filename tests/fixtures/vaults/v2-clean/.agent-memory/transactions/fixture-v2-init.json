@@ -1,0 +1,35 @@
+{
+  "actor": "fixture-builder",
+  "created_paths": [
+    ".agent-memory-root-write.anchor",
+    "AGENTS.md",
+    "README.md",
+    ".agent-memory/config.json",
+    ".agent-memory/schema.json",
+    ".agent-memory/state/catalog.json",
+    ".agent-memory/state/focus/demo.json",
+    ".agent-memory/transactions/fixture-v2-init.json"
+  ],
+  "desired": {
+    "created_paths": [
+      ".agent-memory-root-write.anchor",
+      "AGENTS.md",
+      "README.md",
+      ".agent-memory/config.json",
+      ".agent-memory/schema.json",
+      ".agent-memory/state/catalog.json",
+      ".agent-memory/state/focus/demo.json",
+      ".agent-memory/transactions/fixture-v2-init.json"
+    ],
+    "schema_version": 2
+  },
+  "expected_base": {
+    "root_empty": true
+  },
+  "occurred_at": "2026-01-01T00:00:00Z",
+  "operation": "initialize",
+  "schema_version": 2,
+  "status": "accepted",
+  "target": ".",
+  "transaction_id": "fixture-v2-init"
+}
