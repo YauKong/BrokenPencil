@@ -13,8 +13,10 @@ description: Use only after obsidian-agent-memory routes a read-only question ab
 
 ## Workflow
 
-1. Begin the answer by stating that `obsidian-agent-memory` routed here and one
-   root/project was resolved before retrieval or adapter selection.
+1. State the selected root and, for project-scoped retrieval, the project and
+   selection reason. If the project is unknown, use the route subskill first
+   for bounded discovery; do not demand a project ID before that discovery.
+   Global-memory reads require only the root.
 2. Use the adapter selected by `select_read_adapter`; if optional `obsidian-cli`
    is unavailable, report its reason and use the bounded filesystem adapter.
 3. Use `search_accepted_records` and `read_accepted_record` so only

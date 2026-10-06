@@ -3,6 +3,7 @@ import io
 import json
 import multiprocessing
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -202,8 +203,12 @@ class VaultToolCommandTests(unittest.TestCase):
             for command in commands:
                 self.assertIn(command, result.stdout)
             if scripts is MAINTAIN_SCRIPTS:
-                self.assertNotIn(" execute", result.stdout)
-                self.assertNotIn(" apply", result.stdout)
+                command_choices = re.search(r"\{([^{}\n]+)\}", result.stdout)
+                self.assertIsNotNone(command_choices)
+                available_commands = set(command_choices.group(1).split(","))
+                self.assertNotIn("execute", available_commands)
+                self.assertNotIn("apply", available_commands)
+                self.assertIn("apply-proposal-resolution", available_commands)
 
             result = self.assert_wrapper_parity(scripts, commands[0])
             self.assertEqual(2, result.returncode)

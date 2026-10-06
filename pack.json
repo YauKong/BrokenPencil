@@ -21,15 +21,15 @@
     },
     {
       "path": "README.md",
-      "sha256": "e140862a8c6d68c746c4af6161b382571a501f0c3f5913422d3e37f58d2a9c10"
+      "sha256": "abb95c9cc9c45cc8dea9b53be2c00d779a260cee12da370db0687209740dc8ee"
     },
     {
       "path": "VERSION",
-      "sha256": "fe840f52fb5578d3f77eb497115eb02c6036601c3a53e60df7995c7276baa77a"
+      "sha256": "b4b16faea52dc04ccfe32f7b342094855923ebf599a3cac1940470a2d6d7c261"
     },
     {
       "path": "docs/release-and-authorization.md",
-      "sha256": "1604a1009d62067f207435657bff3a506fd78436e2f0ca560232b44c77e1835d"
+      "sha256": "be2657ee1c9437a2ce3b24b99f0aae26be5ad5f0de2a980cccf892374767545a"
     },
     {
       "path": "docs/vault-migration-operations.md",
@@ -57,11 +57,11 @@
     },
     {
       "path": "skills/obsidian-agent-memory-query/SKILL.md",
-      "sha256": "7b542fe87cc246f305d3646db60ae40dc2862bc40e6483dde00b22ca381db8a7"
+      "sha256": "6def048af43979a3f300d587434e9295b7f85579cd1205547107f3eb1292714f"
     },
     {
       "path": "skills/obsidian-agent-memory-route/SKILL.md",
-      "sha256": "452daa009eafcf301a49b6edc8eb61dcf9d1dda9dc499bbaf7074120682a2a15"
+      "sha256": "6f8eb537af105a159019b056eec72a9a832cb6840cb1def988842f5ea2cdeca6"
     },
     {
       "path": "skills/obsidian-agent-memory-summary/SKILL.md",
@@ -73,11 +73,11 @@
     },
     {
       "path": "skills/obsidian-agent-memory/SKILL.md",
-      "sha256": "c1cd7ea779b5247347b51d3d0cdf80bf50f9bbff938c3e3672458c6f5f75aaa9"
+      "sha256": "72748954585723bf035d4b6653a4aa3f67f8b720a4ccb89525fee0dc5ca0897b"
     },
     {
       "path": "skills/obsidian-agent-memory/references/configuration-and-path-discovery.md",
-      "sha256": "ec4065c0045695b8090ef27e5a1048419fc528401630af6dd872872723319e75"
+      "sha256": "2c7c2919acffbdca4e32f9717ca6b42a4e3f4457ff781e0259bdbc06553c90d8"
     },
     {
       "path": "skills/obsidian-agent-memory/references/projection-contract.md",
@@ -93,7 +93,7 @@
     },
     {
       "path": "skills/obsidian-agent-memory/references/retrieval-adapters.md",
-      "sha256": "f708130ebb170caabc2aa0ecb1b7c71339c73741d5a1cc217a3cfa6f999b882a"
+      "sha256": "ad0d5233b235a0316089b0ad00331b30fe9477c032f21fb3e23f3cbab77a0c0b"
     },
     {
       "path": "skills/obsidian-agent-memory/references/story-session-coordination.md",
@@ -121,7 +121,7 @@
     },
     {
       "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/adapters.py",
-      "sha256": "c0c661cba891277d354b943bdc02b99a862c7eddeb045aba0223c807fb78d985"
+      "sha256": "a6fa4485c47af57f23b2a45944050e0566925df5e1d4e9bed11b5d477e276323"
     },
     {
       "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/artifact_schemas.py",
@@ -141,7 +141,7 @@
     },
     {
       "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/config.py",
-      "sha256": "8fbcdf41ac42dcce5ad835c01051fd5d18384fcd0977bf7fa41f8010947dbecb"
+      "sha256": "3a7f744daeb7a0d953cfdada2692c487ec0504d05e3fa62e90e30c1a9707b855"
     },
     {
       "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/coordination.py",
@@ -217,7 +217,7 @@
     },
     {
       "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/runtime_identity.py",
-      "sha256": "16bf7dc012e39cb37b8c56c82310640d4074da970fb30899e9d3155fde922a51"
+      "sha256": "15e0ffa1dc31f19f74d41aabd686001c59b72ee3f1155891ba4490809ec9144f"
     },
     {
       "path": "skills/obsidian-agent-memory/scripts/obsidian_agent_memory/session_relationships.py",
@@ -609,7 +609,7 @@
     },
     {
       "path": "tests/fixtures/vaults/v2-clean/_index/stale-or-uncertain.md",
-      "sha256": "a00ada2746ae9c3a7ee7461034605292b1f223892eba96fa441ee4accacbf5b4"
+      "sha256": "c459d8daec05ea42b8b12428cdae2d8bf6a8ef59e01d9fbfccbcd693e985f02e"
     },
     {
       "path": "tests/fixtures/vaults/v2-clean/_records/projects/demo/stories/story-demo-cache--r0001.md",
@@ -625,7 +625,7 @@
     },
     {
       "path": "tests/fixtures/vaults/v2-clean/projects/demo/stories/story-demo-cache.md",
-      "sha256": "17b47b310efaf268b6f30945166e201ebd020871c86d3d998f679ec0f6b8c280"
+      "sha256": "f4ddbd8bc4d38d9039df9528ce12e66cab9c44dadacfa877c7b3e8a740103cdb"
     },
     {
       "path": "tests/fixtures/vaults/v2-proposal-resolution/.agent-memory-fixture.json",
@@ -665,7 +665,7 @@
     },
     {
       "path": "tests/integration/test_core_workflow.py",
-      "sha256": "740599937cbd9daf9eccb8ed5017a4eb51a1a4c0dc0d70e2e215f44a09add37b"
+      "sha256": "7e546926542c6799104319912d576a64cf4dbba8142a93b77df237b6c1bc3abf"
     },
     {
       "path": "tests/integration/test_pack_end_to_end.py",
@@ -685,7 +685,7 @@
     },
     {
       "path": "tests/integration/test_vault_migration_workflow.py",
-      "sha256": "02630e657bed617d94008c98c81f46b5c21a556cd2afc4fc770de2d0cbc0dabe"
+      "sha256": "5262f486b33e32f593d8ee5f65eb5d33553a64a756d2ddef19e09d0385e0043d"
     },
     {
       "path": "tests/portability.py",
@@ -705,7 +705,7 @@
     },
     {
       "path": "tests/unit/test_adapters.py",
-      "sha256": "623f488ba5f757e60217f37d87a6504c6ea799097a4e2ba494f6891eaac578bc"
+      "sha256": "b21a3630db812648fe71b6526475fc304ca3c74e00a58bf57bb40d57c730d1df"
     },
     {
       "path": "tests/unit/test_artifact_schemas.py",
@@ -713,7 +713,7 @@
     },
     {
       "path": "tests/unit/test_config_paths.py",
-      "sha256": "b65c6157617c88e87e09529263122031f04c0a69e4cd6402aa178a4da119bb50"
+      "sha256": "5bd2819e35548e332c18676b519efd341af6531c94411832cc7828e8f409035f"
     },
     {
       "path": "tests/unit/test_coordination.py",
@@ -721,7 +721,7 @@
     },
     {
       "path": "tests/unit/test_doctor.py",
-      "sha256": "a2ae5e8f7668c1af243143b53e4dbae8a96fb57ca4beed386c05c68401932244"
+      "sha256": "3708ed991423eb60461b872b65c4a09f85cc99587c762d25ebbd55af39fa9875"
     },
     {
       "path": "tests/unit/test_focus_projections.py",
@@ -729,7 +729,7 @@
     },
     {
       "path": "tests/unit/test_install_lifecycle.py",
-      "sha256": "a386fe7b17c157679cae2c584f8d239ad24eadfdc9df51a6d3861eb45ddadfc0"
+      "sha256": "671a415fdc3b198338728d0f858d0c88ce912f863ec7769de7ddfb809f8337e1"
     },
     {
       "path": "tests/unit/test_maintenance.py",
@@ -809,19 +809,19 @@
     },
     {
       "path": "tests/unit/test_release_archive.py",
-      "sha256": "98219f3071f40f054b2451483cedd998dca794ba2ac3329a0fad82fff2aa2f3c"
+      "sha256": "5e560b8d8f43a97ee9ff4b726c60c04b9b57faba283989cdf8c45041c0e2390f"
     },
     {
       "path": "tests/unit/test_release_documentation.py",
-      "sha256": "b9ab43e18c2a1548eb3b64c43f0e646d67989543de32c1229d672c0f080fa145"
+      "sha256": "b9b2deca7bc320c64f202ace99edd944944e8146196fd1b91dbb5059c7fd4637"
     },
     {
       "path": "tests/unit/test_release_metadata.py",
-      "sha256": "0e6decfc8c81bb943d9475ba5b148c8bf6807d8e079a9592c7f8bf6271855593"
+      "sha256": "cf5d3b036e412da932e44ca2dd077dd8897fa9bced958893f6363cf64f22c441"
     },
     {
       "path": "tests/unit/test_release_version_compatibility.py",
-      "sha256": "ac7e98527a48caf6fe081bec1f571be6474f6c46ebfd3dbed49331d5904a4ff1"
+      "sha256": "d91b12495ad8407adc7d9327bfdf9dc7e97c7603e0937de26d0a2ad9e2f1ab03"
     },
     {
       "path": "tests/unit/test_resolution_visibility.py",
@@ -837,7 +837,7 @@
     },
     {
       "path": "tests/unit/test_runtime_identity.py",
-      "sha256": "aa9fe9bba2b529b2d058cb0461a198f68421c6af0dcb39ab530e8a20c8d49d6f"
+      "sha256": "46310132910e3b4a40fcc0fd76bfe049eb714c631ba522dcd9955d8199ed7b2d"
     },
     {
       "path": "tests/unit/test_session_relationships.py",
@@ -861,15 +861,15 @@
     },
     {
       "path": "tests/unit/test_uninstall_lifecycle.py",
-      "sha256": "80d2485f75d2d5135f9e73d45d803a61b965fe4414e18503501954a7691d6e85"
+      "sha256": "0d4bce19918f1e0da8521a401d87fbf165208e8292e630513f767ccaaa65ff2e"
     },
     {
       "path": "tests/unit/test_vault_fixtures.py",
-      "sha256": "6697bcf6768d5d3ee29f422aba1f6eee89710afc5dff3934094c70952daa7d1c"
+      "sha256": "5642582ca753e5bc0b06e45bf4fcbf3a2dfd2cce71fab98ebff810cee4b0fe3e"
     },
     {
       "path": "tests/unit/test_vault_tool_commands.py",
-      "sha256": "e4073e870608e38ce8cbdd208bb3fba269a0c09f248348e1060bce1ee4b70a66"
+      "sha256": "7a1f250b5629cb7673f70d06a53f447c9d0ab1c3aee9de4aba1321a475dc5f91"
     },
     {
       "path": "tools/__init__.py",
@@ -901,7 +901,7 @@
     },
     {
       "path": "tools/agent_memory_pack/metadata.py",
-      "sha256": "6210f99aa6b2f82ffd2f1d3aced5707dbcc9a0bac2f73236f9e3ddf0d05e526c"
+      "sha256": "5732ead457c622db02416b32e5f88634d2f3ae9f1f8a0c285a2630281b084076"
     },
     {
       "path": "tools/agent_memory_pack/models.py",
@@ -949,7 +949,7 @@
     },
     {
       "path": "tools/validate.py",
-      "sha256": "19c5a293033e756159f267842aaa6b42ae6e463fec4a1e0106d5ef697ff8e3b1"
+      "sha256": "63f64514a321c575e332a70d9565313f47c94da069850d77f7b341862a199f1e"
     },
     {
       "path": "tools/vault_maintain.py",
@@ -961,7 +961,7 @@
     },
     {
       "path": "tools/verify_release.py",
-      "sha256": "f6883d98a23e423521d6bc664cd479e82c86650bdcb238380ac6ff7206955d9d"
+      "sha256": "6cdb863df8c3e6dc82895324dae810ccb70e20749740d620c65cb2ebf65ae644"
     }
   ],
   "minimum_python": "3.9",
@@ -970,9 +970,9 @@
     "obsidian-cli",
     "obsidian-knowledge-base"
   ],
-  "release_archive": "obsidian-agent-memory-skill-pack-2.0.1.zip",
-  "release_checksum": "obsidian-agent-memory-skill-pack-2.0.1.zip.sha256",
-  "release_manifest": "obsidian-agent-memory-skill-pack-2.0.1-manifest.json",
+  "release_archive": "obsidian-agent-memory-skill-pack-2.0.2.zip",
+  "release_checksum": "obsidian-agent-memory-skill-pack-2.0.2.zip.sha256",
+  "release_manifest": "obsidian-agent-memory-skill-pack-2.0.2-manifest.json",
   "removed_members": [
     "obsidian-agent-memory-writer"
   ],
@@ -981,5 +981,5 @@
     1,
     2
   ],
-  "version": "2.0.1"
+  "version": "2.0.2"
 }

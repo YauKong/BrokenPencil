@@ -175,7 +175,7 @@ def _validate_portable_components(parts: Sequence[str]) -> None:
         validate_identifier(component, "adapter path component")
 
 
-def _validated_relative_path(root: Path, value: str) -> Tuple[Path, str]:
+def _relative_path(value: str) -> PurePosixPath:
     if not isinstance(value, str) or not value or "\\" in value:
         raise ValidationError("invalid adapter path")
     pure_path = PurePosixPath(value)
@@ -188,6 +188,13 @@ def _validated_relative_path(root: Path, value: str) -> Tuple[Path, str]:
         or any(part in (".", "..") for part in pure_path.parts)
     ):
         raise ValidationError("invalid adapter path")
+    if any(ord(char) < 32 or ord(char) == 127 or char == ":" for char in value):
+        raise ValidationError("invalid adapter path")
+    return pure_path
+
+
+def _validated_relative_path(root: Path, value: str) -> Tuple[Path, str]:
+    pure_path = _relative_path(value)
     _validate_portable_components(pure_path.parts[1:])
     raw_root = _raw_absolute(root)
     allowed_base = raw_root / pure_path.parts[0]
@@ -196,6 +203,20 @@ def _validated_relative_path(root: Path, value: str) -> Tuple[Path, str]:
     _plain_contained_metadata(raw_root, raw_candidate, allow_missing=True)
     _resolve_inside_safely(allowed_base, *pure_path.parts[1:])
     return raw_candidate, pure_path.as_posix()
+
+
+def _discovered_path(root: Path, value: str) -> Optional[Tuple[Path, str]]:
+    """Ignore legacy display names only in project browsing, never direct reads."""
+    pure_path = _relative_path(value)
+    try:
+        _validate_portable_components(pure_path.parts[1:])
+    except ValidationError:
+        if pure_path.parts[0] != "projects":
+            raise
+        # Even ignored legacy entries must not be redirects or escapes.
+        _plain_contained_metadata(root, root.joinpath(*pure_path.parts), allow_missing=True)
+        return None
+    return _validated_relative_path(root, value)
 
 
 def _matching_excerpt(text: str, normalized_query: str) -> str:
@@ -248,9 +269,10 @@ class _FilesystemReadAdapter:
                             raise ValidationError(
                                 "adapter entry escaped the memory root"
                             ) from error
-                        resolved, normalized = _validated_relative_path(
-                            self._root, relative_path
-                        )
+                        discovered = _discovered_path(self._root, relative_path)
+                        if discovered is None:
+                            continue
+                        resolved, normalized = discovered
                         _, metadata = _plain_contained_metadata(
                             self._root, resolved
                         )
@@ -259,7 +281,8 @@ class _FilesystemReadAdapter:
                                 "adapter entry metadata unavailable"
                             )
                         if stat.S_ISREG(metadata.st_mode):
-                            regular_files.append(normalized)
+                            if PurePosixPath(normalized).suffix.lower() in ("", ".md", ".base"):
+                                regular_files.append(normalized)
                         elif stat.S_ISDIR(metadata.st_mode):
                             child_directories.append((normalized, resolved))
             except OSError as error:
@@ -354,31 +377,45 @@ class _ObsidianCliReadAdapter:
     def search(self, query: str, limit: int = 20) -> Tuple[SearchHit, ...]:
         normalized_query = _validate_query(query)
         _validate_limit(limit)
-        output = self._run("search", (("query", normalized_query), ("limit", limit)))
         hits = []
-        for line in output.splitlines():
-            if not line:
+        for prefix in _ORDERED_READ_ROOTS:
+            output = self._run("search", (("query", normalized_query), ("path", prefix), ("limit", limit)))
+            if output.strip() == "No matches found.":
                 continue
-            relative_path, separator, excerpt = line.partition("\t")
-            _, normalized_path = _validated_relative_path(self._root, relative_path)
-            hits.append(SearchHit(normalized_path, excerpt if separator else ""))
-            if len(hits) == limit:
-                break
-        return tuple(hits)
+            lines = tuple(line for line in output.splitlines() if line)
+            skipped_legacy = False
+            for line in lines:
+                relative_path, separator, excerpt = line.partition("\t")
+                if not relative_path.startswith(prefix + "/"):
+                    raise ValidationError("Obsidian CLI returned a path outside the requested prefix")
+                discovered = _discovered_path(self._root, relative_path)
+                if discovered is None:
+                    skipped_legacy = True
+                    continue
+                _, normalized_path = discovered
+                hits.append(SearchHit(normalized_path, excerpt if separator else ""))
+            if skipped_legacy and len(lines) >= limit:
+                raise ValidationError("Obsidian CLI search results incomplete after legacy filtering; narrow the query")
+        return tuple(sorted(hits, key=lambda hit: hit.relative_path))[:limit]
 
     def files(self, prefix: str, limit: int = 200) -> Tuple[str, ...]:
         _validate_limit(limit)
         _, normalized_prefix = _validated_relative_path(self._root, prefix)
-        output = self._run("files", (("path", normalized_prefix), ("limit", limit)))
+        # Obsidian files supports folder/ext, not path/limit. Bound its output
+        # in _run and apply the caller's result limit after validation.
+        output = self._run("files", (("folder", normalized_prefix), ("ext", "md")))
         paths = []
         for line in output.splitlines():
             if not line:
                 continue
-            _, normalized_path = _validated_relative_path(self._root, line)
+            if not line.startswith(normalized_prefix + "/"):
+                raise ValidationError("Obsidian CLI returned a path outside the requested prefix")
+            discovered = _discovered_path(self._root, line)
+            if discovered is None:
+                continue
+            _, normalized_path = discovered
             paths.append(normalized_path)
-            if len(paths) == limit:
-                break
-        return tuple(sorted(paths))
+        return tuple(sorted(paths))[:limit]
 
 
 def _cli_command(

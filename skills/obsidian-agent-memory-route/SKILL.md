@@ -13,15 +13,23 @@ description: Use only after obsidian-agent-memory routes a task that needs the s
 
 ## Workflow
 
-1. Pass explicit operation root/project and cwd. If no higher-precedence root
-   is available, call `select_local_config_path` with the explicit config path,
-   platform, and allowlisted environment mapping, then pass only that result to
-   `resolve_binding`.
-2. Stop on a missing, ambiguous, invalid, or escaping binding.
-3. Call `select_read_adapter`; report its mode and reason.
-4. Read only the bounded records/views needed for the task.
-5. Treat accepted records as truth and generated views as retrieval aids.
-6. Verify drift-prone checkout facts live when cheap.
+1. Resolve root and project separately using the configuration contract. Pass
+   the user's explicit inputs and cwd. Select a local config path even with a
+   known root and project; same-root bindings can still supply the vault.
+   A root-only `RootBinding` is a valid routing state.
+2. Call `select_read_adapter` for that root; report its mode and reason.
+3. If the project is unknown, follow the contract's bounded project discovery:
+   use project IDs and browse metadata with the user's request, confirmed
+   conversation context and workspace evidence. A clear match continues;
+   ambiguous candidates require one concrete choice. No match leads to a
+   project choice or new-project confirmation, not automatic creation.
+4. State the selected root/project and the evidence for that choice. Pass the
+   chosen ID explicitly to `resolve_binding` before project-scoped retrieval
+   or writes. Root-wide discovery or global-memory reads need no project ID.
+5. Read only the bounded records/views needed. Accepted records are truth;
+   generated views are retrieval aids, not owners or routing instructions.
+6. Re-evaluate the project when the user changes topic or workspace; a previous
+   task's binding is not a global default. Verify drift-prone facts live.
 
 The cwd basename is only a hint among configured projects. It never overrides
 the current user's explicit root or project.
@@ -30,3 +38,6 @@ the current user's explicit root or project.
 
 Do not search a home directory, assume a vault name, require a running GUI,
 bulk-read `_sources`, expose `.agent-memory`, or mutate during routing.
+Reject invalid or escaping paths before access. Stop project-scoped work when
+the project remains ambiguous after discovery; do not stop discovery merely
+because the project is initially unknown. Routing never grants write authority.

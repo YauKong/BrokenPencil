@@ -47,12 +47,12 @@ REQUIRED_PAYLOAD_PATHS = (
 
 class ReleaseMetadataTests(unittest.TestCase):
     def test_fixed_release_header_and_version_are_exact(self):
-        self.assertEqual(b"2.0.1\n", (REPO_ROOT / "VERSION").read_bytes())
+        self.assertEqual(b"2.0.2\n", (REPO_ROOT / "VERSION").read_bytes())
 
         manifest = load_pack_manifest(REPO_ROOT / "pack.json")
 
         self.assertEqual("obsidian-agent-memory-skill-pack", manifest.name)
-        self.assertEqual("2.0.1", manifest.version)
+        self.assertEqual("2.0.2", manifest.version)
         self.assertEqual("3.9", manifest.minimum_python)
         self.assertEqual((1, 2), manifest.schema_versions)
         self.assertEqual(ACTIVE_MEMBERS, manifest.active_members)
@@ -63,15 +63,15 @@ class ReleaseMetadataTests(unittest.TestCase):
             manifest.optional_capabilities,
         )
         self.assertEqual(
-            "obsidian-agent-memory-skill-pack-2.0.1.zip",
+            "obsidian-agent-memory-skill-pack-2.0.2.zip",
             manifest.release_archive,
         )
         self.assertEqual(
-            "obsidian-agent-memory-skill-pack-2.0.1.zip.sha256",
+            "obsidian-agent-memory-skill-pack-2.0.2.zip.sha256",
             manifest.release_checksum,
         )
         self.assertEqual(
-            "obsidian-agent-memory-skill-pack-2.0.1-manifest.json",
+            "obsidian-agent-memory-skill-pack-2.0.2-manifest.json",
             manifest.release_manifest,
         )
 
@@ -129,7 +129,7 @@ class ReleaseMetadataTests(unittest.TestCase):
                 json.dumps(document, sort_keys=True, indent=2) + "\n",
                 encoding="utf-8",
             )
-            (root / "VERSION").write_bytes(b"2.0.1\n")
+            (root / "VERSION").write_bytes(b"2.0.2\n")
             before = manifest_path.read_bytes()
 
             with self.assertRaises(ConflictError):

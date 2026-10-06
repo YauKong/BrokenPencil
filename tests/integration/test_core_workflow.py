@@ -230,7 +230,11 @@ class CoreWorkflowTests(unittest.TestCase):
                 binding.project_id,
                 _context("tx-initialize"),
             )
-            session = _candidate("session-core", "session", "session accepted body")
+            session = _candidate(
+                "session-core", "session",
+                "# Session: Core\n\n## Session Relationship\n"
+                "session_status: completed\nprimary_story_id: none\nrelated_story_id: none\n\nsession accepted body",
+            )
             session_outcome = commit_record(
                 memory_root,
                 session,

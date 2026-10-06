@@ -48,7 +48,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         print("ERROR {0}".format(error), file=sys.stderr)
         return 5
     print(
-        "VERIFIED obsidian-agent-memory-skill-pack 2.0.1 sha256={0}".format(
+        "VERIFIED obsidian-agent-memory-skill-pack 2.0.2 sha256={0}".format(
             artifacts.archive_sha256
         )
     )

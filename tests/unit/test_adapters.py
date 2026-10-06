@@ -421,6 +421,39 @@ class AdapterSelectionTests(unittest.TestCase):
 
 
 class FilesystemAdapterTests(unittest.TestCase):
+    def test_discovery_ignores_code_and_binary_attachments_without_reading_them(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            project = root / "projects" / "demo"
+            examples = project / "examples"
+            examples.mkdir(parents=True)
+            (project / "overview.md").write_text("accepted overview", encoding="utf-8")
+            (examples / "GhostDepthRendererFeature_example.cs").write_text("private attachment", encoding="utf-8")
+            (examples / "Screenshot 2026.png").write_bytes(b"\x89PNG\xff" * 300000)
+            (examples / "Ghostly Shader.md").write_text("legacy reference", encoding="utf-8")
+            legacy = root / "projects" / "LegacyProject"
+            legacy.mkdir()
+            (legacy / "overview.md").write_text("old project reference", encoding="utf-8")
+            dotted = root / "projects" / "demo.tools"
+            dotted.mkdir()
+            (dotted / "overview.md").write_text("another project", encoding="utf-8")
+            adapter = filesystem_adapter(root)
+            self.assertEqual(("projects/demo.tools/overview.md", "projects/demo/overview.md"), adapter.files("projects"))
+            self.assertEqual((SearchHit("projects/demo/overview.md", "accepted overview"),), adapter.search("accepted"))
+            self.assertEqual((), adapter.search("private attachment"))
+            self.assertTrue((examples / "Screenshot 2026.png").exists())
+
+    def test_attachment_reparse_points_are_rejected_before_skipping(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            project = root / "projects" / "demo"
+            project.mkdir(parents=True)
+            image = project / "asset.png"
+            image.write_bytes(b"image")
+            with simulated_reparse(image), forbid_resolution_at_or_below(image):
+                with self.assertRaises(ValidationError):
+                    filesystem_adapter(root).files("projects")
+
     def test_reads_lists_and_searches_only_the_three_allowed_roots(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
             root = Path(temporary_directory) / "memory"
@@ -1145,13 +1178,51 @@ class FilesystemAdapterTests(unittest.TestCase):
 
 
 class CliAdapterOperationTests(unittest.TestCase):
-    def test_every_operation_is_vault_targeted_and_has_an_explicit_limit(self):
+    def test_saturated_cli_search_cannot_report_legacy_filtered_results_as_complete(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            project = root / "projects/demo"
+            project.mkdir(parents=True)
+            (project / "Ghostly Shader.md").write_text("needle", encoding="utf-8")
+            (project / "overview.md").write_text("needle", encoding="utf-8")
+            runner = FakeRunner(completed(stdout="read\nsearch\nfiles\n"), completed(),
+                                completed(stdout="No matches found.\n"), completed(stdout="No matches found.\n"),
+                                completed(stdout="projects/demo/Ghostly Shader.md\n"))
+            adapter = select_read_adapter(RootBinding(root, None, "AgentMemory"), runner, Path("obsidian")).adapter
+            with self.assertRaisesRegex(ValidationError, "incomplete"):
+                adapter.search("needle", limit=1)
+
+    def test_cli_project_discovery_skips_noncanonical_legacy_notes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            examples = root / "projects/demo/examples"
+            examples.mkdir(parents=True)
+            (examples / "Ghostly Shader.md").write_text("legacy reference", encoding="utf-8")
+            (root / "projects/demo/overview.md").write_text("current view", encoding="utf-8")
+            runner = FakeRunner(completed(stdout="read\nsearch\nfiles\n"), completed(),
+                                completed(stdout="projects/demo/examples/Ghostly Shader.md\nprojects/demo/overview.md\n"))
+            adapter = select_read_adapter(RootBinding(root, None, "AgentMemory"), runner, Path("obsidian")).adapter
+            self.assertEqual(("projects/demo/overview.md",), adapter.files("projects"))
+
+    def test_empty_cli_search_is_not_parsed_as_a_file_path(self):
+        with tempfile.TemporaryDirectory() as directory:
+            Path(directory, "_index").mkdir()
+            runner = FakeRunner(completed(stdout="read\nsearch\nfiles\n"), completed(),
+                                *[completed(stdout="No matches found.\n") for _ in range(3)])
+            adapter = select_read_adapter(RootBinding(Path(directory), None, "AgentMemory"), runner, Path("obsidian")).adapter
+            self.assertEqual((), adapter.search("absent"))
+            self.assertEqual({"path=_index", "path=_records", "path=projects"},
+                             {arg for command, _ in runner.calls[2:] for arg in command if arg.startswith("path=")})
+
+    def test_operations_target_vault_and_use_supported_folder_and_search_limits(self):
         with tempfile.TemporaryDirectory() as temporary_directory:
             runner = FakeRunner(
                 completed(stdout="read\nsearch\nfiles\n"),
                 completed(),
                 completed(stdout="record text\n"),
+                completed(stdout="No matches found.\n"),
                 completed(stdout="_records/a.md\tmatching excerpt\n"),
+                completed(stdout="No matches found.\n"),
                 completed(stdout="_records/a.md\n"),
             )
             selection = select_read_adapter(
@@ -1181,13 +1252,22 @@ class CliAdapterOperationTests(unittest.TestCase):
                         2.0,
                     ),
                     (
+                        ("obsidian", "vault=named-vault", "search", "query=matching", "path=_index", "limit=3"),
+                        2.0,
+                    ),
+                    (
                         (
                             "obsidian",
                             "vault=named-vault",
                             "search",
                             "query=matching",
+                            "path=_records",
                             "limit=3",
                         ),
+                        2.0,
+                    ),
+                    (
+                        ("obsidian", "vault=named-vault", "search", "query=matching", "path=projects", "limit=3"),
                         2.0,
                     ),
                     (
@@ -1195,8 +1275,8 @@ class CliAdapterOperationTests(unittest.TestCase):
                             "obsidian",
                             "vault=named-vault",
                             "files",
-                            "path=_records",
-                            "limit=4",
+                            "folder=_records",
+                            "ext=md",
                         ),
                         2.0,
                     ),

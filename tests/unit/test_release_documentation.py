@@ -30,9 +30,9 @@ class ReleaseDocumentationTests(unittest.TestCase):
             (REPO_ROOT / ".gitignore").read_text(encoding="utf-8"),
         )
         artifacts = (
-            "obsidian-agent-memory-skill-pack-2.0.1.zip",
-            "obsidian-agent-memory-skill-pack-2.0.1.zip.sha256",
-            "obsidian-agent-memory-skill-pack-2.0.1-manifest.json",
+            "obsidian-agent-memory-skill-pack-2.0.2.zip",
+            "obsidian-agent-memory-skill-pack-2.0.2.zip.sha256",
+            "obsidian-agent-memory-skill-pack-2.0.2-manifest.json",
         )
         self.assertEqual(
             artifacts,
@@ -49,7 +49,7 @@ class ReleaseDocumentationTests(unittest.TestCase):
             "Installing on the current workstation does not authorize real-vault detection, migration planning, migration apply, verification, rollback, or cleanup.",
             "A verified real-vault migration does not authorize cleanup execution or deletion of migration or pack rollback evidence.",
             "Local commits do not authorize Git push.",
-            "Creating or verifying the fixed local `v2.0.1` tag does not authorize pushing the tag or moving or deleting any existing tag.",
+            "Creating or verifying the fixed local `v2.0.2` tag does not authorize pushing the tag or moving or deleting any existing tag.",
             "Git push does not authorize release publication.",
             "Release publication requires a new request naming the destination and the exact SHA-256 of each of the three artifacts.",
         )
@@ -65,9 +65,9 @@ class ReleaseDocumentationTests(unittest.TestCase):
         readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
         required = (
             "Python 3.9",
-            "obsidian-agent-memory-skill-pack-2.0.1.zip",
-            "obsidian-agent-memory-skill-pack-2.0.1.zip.sha256",
-            "obsidian-agent-memory-skill-pack-2.0.1-manifest.json",
+            "obsidian-agent-memory-skill-pack-2.0.2.zip",
+            "obsidian-agent-memory-skill-pack-2.0.2.zip.sha256",
+            "obsidian-agent-memory-skill-pack-2.0.2-manifest.json",
             "integrity, not publisher authenticity",
             "$safeExtractor = @'",
             "reject_duplicates",

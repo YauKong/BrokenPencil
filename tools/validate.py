@@ -1,4 +1,4 @@
-"""Validate the source repository and fixed 2.0.1 release metadata."""
+"""Validate the source repository and fixed 2.0.2 release metadata."""
 
 import argparse
 import os

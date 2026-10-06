@@ -1,4 +1,5 @@
 import json
+import re
 import multiprocessing
 import os
 import socket
@@ -600,8 +601,12 @@ class VaultMigrationWorkflowTests(unittest.TestCase):
             self.assertTrue(cleanup_plan_path.is_file())
             maintain_help = run_tool(MAINTAIN_TOOL, "--help", env=environment)
             self.assertEqual(0, maintain_help.returncode, maintain_help.stderr)
-            self.assertNotIn(" apply", maintain_help.stdout)
-            self.assertNotIn(" execute", maintain_help.stdout)
+            command_choices = re.search(r"\{([^{}\n]+)\}", maintain_help.stdout)
+            self.assertIsNotNone(command_choices)
+            commands = set(command_choices.group(1).split(","))
+            self.assertNotIn("apply", commands)
+            self.assertNotIn("execute", commands)
+            self.assertIn("apply-proposal-resolution", commands)
 
             rollback_parent = vault_root / "rollback"
             rollback_parent.mkdir()

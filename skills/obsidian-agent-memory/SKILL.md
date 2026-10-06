@@ -11,6 +11,11 @@ Use this Skill first. Invoke one routed subskill after resolving the task type.
 Current user instruction and explicit operation inputs outrank every stored
 source.
 
+Resolve the memory root separately from the task's project. If only the root
+is known, use the route subskill for bounded project discovery
+and context-based selection before project-scoped work. A missing project at
+this stage is not an error and does not require a global default project.
+
 ## Boundaries
 
 - Agent Memory and the optional Knowledge Base use separately configured roots.
@@ -55,8 +60,8 @@ source.
 When stating stop conditions, enumerate every category below. A decision-only
 read does not allow omitting the mutation category.
 
-- Stop and request one concrete choice when the root/project binding is absent
-  or ambiguous.
+- Stop and request one concrete choice when the root is absent or ambiguous,
+  or a required project remains absent or ambiguous after bounded routing.
 - Reject an invalid or escaping path before access.
 - Stop a mutation when authorization or expected revision is missing.
 - Preserve a proposal on conflict.

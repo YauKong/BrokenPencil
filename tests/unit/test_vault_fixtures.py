@@ -41,6 +41,11 @@ EXPECTED = {
         "_index/current-focus.md",
         "projects/demo/current-focus.md",
     ),
+    "v2-proposal-resolution": ("AGENTS.md",),
+    "v2-story-session-coordination": (
+        "AGENTS.md",
+        "projects/demo/sessions/2026-09-01-legacy.md",
+    ),
 }
 
 EXPECTED_FILES = {
@@ -114,6 +119,15 @@ EXPECTED_FILES = {
         "projects/demo/overview.md",
         "projects/demo/current-focus.md",
         "projects/demo/stories/story-demo-cache.md",
+    ),
+    "v2-proposal-resolution": (
+        ".agent-memory-fixture.json",
+        "AGENTS.md",
+    ),
+    "v2-story-session-coordination": (
+        ".agent-memory-fixture.json",
+        "AGENTS.md",
+        "projects/demo/sessions/2026-09-01-legacy.md",
     ),
 }
 

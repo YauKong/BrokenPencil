@@ -1,4 +1,7 @@
-# Portable Agent Memory Skill Pack 2.0.1
+# Portable Agent Memory Skill Pack 2.0.2
+
+For local root, project and optional Obsidian CLI setup, see the
+[configuration guide](skills/obsidian-agent-memory/references/configuration-and-path-discovery.md#local-setup).
 
 This repository is the source of truth for the portable Agent Memory Skill
 family. It requires Python 3.9 or newer and installs exactly these nine members:
@@ -18,7 +21,7 @@ installation does not configure or migrate memory. Every Skill root, state
 root, workspace, memory root, actor, time, reviewed digest, and authorization
 is explicit; the tools do not search a home directory or select a vault.
 
-Version 2.0.1 supports reviewed managed upgrades from 2.0.0. Its lifecycle
+Version 2.0.2 supports reviewed managed upgrades from 2.0.0. Its lifecycle
 reader retains 2.0.0 plans and owned installation state for recovery, uninstall,
 and exact rollback; unknown managed versions are refused. Use the new verified
 source to create a new upgrade plan rather than reusing an earlier plan with
@@ -28,9 +31,9 @@ different source bytes. This release does not migrate memory automatically.
 
 Download all three artifacts into an otherwise reviewed directory:
 
-- `obsidian-agent-memory-skill-pack-2.0.1.zip`
-- `obsidian-agent-memory-skill-pack-2.0.1.zip.sha256`
-- `obsidian-agent-memory-skill-pack-2.0.1-manifest.json`
+- `obsidian-agent-memory-skill-pack-2.0.2.zip`
+- `obsidian-agent-memory-skill-pack-2.0.2.zip.sha256`
+- `obsidian-agent-memory-skill-pack-2.0.2-manifest.json`
 
 The checksum sidecar proves integrity, not publisher authenticity. Compare the
 reviewed release/tag hash through a trusted channel before running this block.
@@ -40,9 +43,9 @@ open for exclusive extraction, and leaves an incomplete unique directory for
 explicit review if a later write fails.
 
 ```powershell
-$archive = Resolve-Path -LiteralPath .\obsidian-agent-memory-skill-pack-2.0.1.zip
-$checksum = Resolve-Path -LiteralPath .\obsidian-agent-memory-skill-pack-2.0.1.zip.sha256
-$releaseManifest = Resolve-Path -LiteralPath .\obsidian-agent-memory-skill-pack-2.0.1-manifest.json
+$archive = Resolve-Path -LiteralPath .\obsidian-agent-memory-skill-pack-2.0.2.zip
+$checksum = Resolve-Path -LiteralPath .\obsidian-agent-memory-skill-pack-2.0.2.zip.sha256
+$releaseManifest = Resolve-Path -LiteralPath .\obsidian-agent-memory-skill-pack-2.0.2-manifest.json
 $checksumLine = (Get-Content -LiteralPath $checksum -Raw).TrimEnd("`r", "`n")
 $tokens = $checksumLine -split '  ', 2
 if ($tokens.Count -ne 2 -or $tokens[1] -ne $archive.Path.Split([IO.Path]::DirectorySeparatorChar)[-1]) { throw 'Invalid checksum sidecar' }
@@ -93,7 +96,7 @@ if set(document) != {
     raise ValueError("invalid release manifest keys")
 if document["archive"] != archive_path.name or document["schema_version"] != 1:
     raise ValueError("release identity mismatch")
-if document["pack_name"] != "obsidian-agent-memory-skill-pack" or document["pack_version"] != "2.0.1":
+if document["pack_name"] != "obsidian-agent-memory-skill-pack" or document["pack_version"] != "2.0.2":
     raise ValueError("release pack mismatch")
 records = document["files"]
 if not isinstance(records, list) or not records:
@@ -128,7 +131,7 @@ canonical = (json.dumps(
 ) + "\n").encode("utf-8")
 if hashlib.sha256(canonical).hexdigest() != document["content_revision"]:
     raise ValueError("content revision mismatch")
-prefix = "obsidian-agent-memory-skill-pack-2.0.1"
+prefix = "obsidian-agent-memory-skill-pack-2.0.2"
 expected_names = tuple(prefix + "/" + item["path"] for item in validated)
 with archive_path.open("rb") as archive_file:
     archive_hash = hashlib.sha256()
@@ -281,15 +284,15 @@ real-vault migration, maintenance recovery, push, or publication.
 
 The retained local release artifact names are:
 
-- `obsidian-agent-memory-skill-pack-2.0.1.zip`
-- `obsidian-agent-memory-skill-pack-2.0.1.zip.sha256`
-- `obsidian-agent-memory-skill-pack-2.0.1-manifest.json`
+- `obsidian-agent-memory-skill-pack-2.0.2.zip`
+- `obsidian-agent-memory-skill-pack-2.0.2.zip.sha256`
+- `obsidian-agent-memory-skill-pack-2.0.2-manifest.json`
 
 - Passing local tests does not authorize installation on the current workstation.
 - Building local release artifacts does not authorize installation, Git push, upload, or release publication.
 - Installing on the current workstation does not authorize real-vault detection, migration planning, migration apply, verification, rollback, or cleanup.
 - A verified real-vault migration does not authorize cleanup execution or deletion of migration or pack rollback evidence.
 - Local commits do not authorize Git push.
-- Creating or verifying the fixed local `v2.0.1` tag does not authorize pushing the tag or moving or deleting any existing tag.
+- Creating or verifying the fixed local `v2.0.2` tag does not authorize pushing the tag or moving or deleting any existing tag.
 - Git push does not authorize release publication.
 - Release publication requires a new request naming the destination and the exact SHA-256 of each of the three artifacts.

@@ -1,4 +1,4 @@
-"""Managed lifecycle compatibility across the 2.0.0 / 2.0.1 boundary."""
+"""Managed lifecycle compatibility across the 2.0.0 / 2.0.2 boundary."""
 
 import json
 import hashlib
@@ -57,7 +57,7 @@ class ReleaseVersionCompatibilityTests(unittest.TestCase):
             )
             self.assertEqual(0, result.returncode, result.stdout + result.stderr)
             self.assertEqual({
-                "kind": "pack-manifest", "version": "2.0.1",
+                "kind": "pack-manifest", "version": "2.0.2",
                 "verification_status": "managed-valid",
                 "manifest_sha256": hashlib.sha256((selection.state_root / "installed.json").read_bytes()).hexdigest(),
             }, json.loads(result.stdout))
@@ -67,7 +67,7 @@ class ReleaseVersionCompatibilityTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             plan = _plan(_selection(root))
-            for version in ("2.0.0", "2.0.1"):
+            for version in ("2.0.0", "2.0.1", "2.0.2"):
                 with self.subTest(version=version):
                     candidate = replace(plan, to_version=version)
                     loaded, _ = _review_plan(candidate, root, version + ".json")
@@ -85,19 +85,45 @@ class ReleaseVersionCompatibilityTests(unittest.TestCase):
             plan, digest = _review_plan(_plan(selection), root)
             self.assertEqual((), plan.blockers)
             self.assertEqual("2.0.0", plan.from_version)
-            self.assertEqual("2.0.1", plan.to_version)
+            self.assertEqual("2.0.2", plan.to_version)
             installed = apply_install(
                 REPO_ROOT, plan, digest, "operator", "2026-09-11T01:00:00Z",
                 "upgrade-approval",
             )
-            self.assertEqual("2.0.1", installed.version)
-            self.assertEqual("2.0.1", json.loads(state_path.read_bytes())["pack_version"])
+            self.assertEqual("2.0.2", installed.version)
+            self.assertEqual("2.0.2", json.loads(state_path.read_bytes())["pack_version"])
             self.assertNotEqual(prior_skills, _snapshot(selection.skills_root))
             rolled_back = rollback_lifecycle(
                 selection, plan.transaction_id, "operator",
                 "2026-09-11T01:05:00Z", "rollback-approval",
             )
             self.assertEqual("2.0.0", rolled_back.version)
+            self.assertEqual(prior_state, state_path.read_bytes())
+            self.assertEqual(prior_skills, _snapshot(selection.skills_root))
+
+    def test_managed_201_to_202_upgrade_and_rollback_restore_exact_prior_bytes(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            selection = _selection(root)
+            state_path = _managed_fixture(selection, "2.0.1")
+            prior_state = state_path.read_bytes()
+            prior_skills = _snapshot(selection.skills_root)
+            plan, digest = _review_plan(_plan(selection), root)
+            self.assertEqual((), plan.blockers)
+            self.assertEqual("2.0.1", plan.from_version)
+            self.assertEqual("2.0.2", plan.to_version)
+            installed = apply_install(
+                REPO_ROOT, plan, digest, "operator", "2026-09-11T01:00:00Z",
+                "upgrade-approval",
+            )
+            self.assertEqual("2.0.2", installed.version)
+            self.assertEqual("2.0.2", json.loads(state_path.read_bytes())["pack_version"])
+            self.assertNotEqual(prior_skills, _snapshot(selection.skills_root))
+            rolled_back = rollback_lifecycle(
+                selection, plan.transaction_id, "operator",
+                "2026-09-11T01:05:00Z", "rollback-approval",
+            )
+            self.assertEqual("2.0.1", rolled_back.version)
             self.assertEqual(prior_state, state_path.read_bytes())
             self.assertEqual(prior_skills, _snapshot(selection.skills_root))
 
@@ -109,7 +135,7 @@ class ReleaseVersionCompatibilityTests(unittest.TestCase):
             if stage == "before-state-lock-release":
                 raise SimulatedCrash()
 
-        for version in ("2.0.0", "2.0.1"):
+        for version in ("2.0.0", "2.0.1", "2.0.2"):
             with self.subTest(version=version), tempfile.TemporaryDirectory() as temporary:
                 root = Path(temporary)
                 selection = _selection(root)

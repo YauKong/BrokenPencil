@@ -19,7 +19,7 @@ $maintainTool = Join-Path $skillsRoot 'obsidian-agent-memory/scripts/vault_maint
 Prior success does not continue automatically. Record the local-work
 authorization reference; tag creation needs a new request. This boundary covers
 repository files, local commits, and creation and verification of a fixed local
-`v2.0.1` tag. It never authorizes moving an existing tag, pushing, or publishing.
+`v2.0.2` tag. It never authorizes moving an existing tag, pushing, or publishing.
 
 ## 2. Current-workstation install dry run
 
@@ -194,15 +194,15 @@ local tag, or Git push does not imply publication authorization.
 
 The retained local release artifact names are:
 
-- `obsidian-agent-memory-skill-pack-2.0.1.zip`
-- `obsidian-agent-memory-skill-pack-2.0.1.zip.sha256`
-- `obsidian-agent-memory-skill-pack-2.0.1-manifest.json`
+- `obsidian-agent-memory-skill-pack-2.0.2.zip`
+- `obsidian-agent-memory-skill-pack-2.0.2.zip.sha256`
+- `obsidian-agent-memory-skill-pack-2.0.2-manifest.json`
 
 - Passing local tests does not authorize installation on the current workstation.
 - Building local release artifacts does not authorize installation, Git push, upload, or release publication.
 - Installing on the current workstation does not authorize real-vault detection, migration planning, migration apply, verification, rollback, or cleanup.
 - A verified real-vault migration does not authorize cleanup execution or deletion of migration or pack rollback evidence.
 - Local commits do not authorize Git push.
-- Creating or verifying the fixed local `v2.0.1` tag does not authorize pushing the tag or moving or deleting any existing tag.
+- Creating or verifying the fixed local `v2.0.2` tag does not authorize pushing the tag or moving or deleting any existing tag.
 - Git push does not authorize release publication.
 - Release publication requires a new request naming the destination and the exact SHA-256 of each of the three artifacts.

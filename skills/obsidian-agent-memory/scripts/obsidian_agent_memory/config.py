@@ -2,6 +2,7 @@
 
 import json
 import os
+import unicodedata
 from pathlib import Path
 from typing import Mapping, Optional
 
@@ -79,16 +80,22 @@ def _validate_binding(binding):
     workspace = _require_absolute_path(binding["workspace"], "workspace")
     memory_root = _require_absolute_path(binding["memory_root"], "memory_root")
     try:
-        project_id = validate_identifier(binding["project_id"], "project_id")
+        project_id = (
+            validate_identifier(binding["project_id"], "project_id")
+            if binding["project_id"] is not None else None
+        )
     except ValidationError as error:
         raise ConfigurationError("invalid project_id") from error
 
     obsidian_vault = binding.get("obsidian_vault")
     if obsidian_vault is not None:
-        try:
-            obsidian_vault = validate_identifier(obsidian_vault, "obsidian_vault")
-        except ValidationError as error:
-            raise ConfigurationError("invalid obsidian_vault") from error
+        if (
+            not isinstance(obsidian_vault, str)
+            or not obsidian_vault.strip()
+            or len(obsidian_vault) > 255
+            or any(unicodedata.category(char).startswith("C") for char in obsidian_vault)
+        ):
+            raise ConfigurationError("invalid obsidian_vault")
     return {
         "workspace": workspace,
         "memory_root": memory_root,
@@ -196,6 +203,17 @@ def _validate_explicit_project(explicit_project: Optional[str]) -> Optional[str]
         raise ConfigurationError("invalid explicit_project") from error
 
 
+def _vault_for_root(bindings, root):
+    vaults = {
+        binding["obsidian_vault"] for binding in bindings
+        if _normalise_path(binding["memory_root"]) == _normalise_path(root)
+        and binding["obsidian_vault"] is not None
+    }
+    if len(vaults) > 1:
+        raise ConfigurationError("ambiguous vault binding for selected memory root")
+    return next(iter(vaults), None)
+
+
 def resolve_binding(
     explicit_root: Optional[Path],
     explicit_project: Optional[str],
@@ -203,19 +221,39 @@ def resolve_binding(
     config_path: Optional[Path],
     cwd: Path,
 ) -> RootBinding:
-    """Resolve a root by explicit, environment, then explicit-config precedence."""
-    project_id = _validate_explicit_project(explicit_project)
-    if explicit_root is not None:
-        return RootBinding(_resolve_root(explicit_root, "explicit"), project_id, None)
+    """Resolve the root first, then a project within that root when available.
 
-    environment_root = env.get("OBSIDIAN_AGENT_MEMORY_ROOT")
-    if environment_root is not None:
-        return RootBinding(_resolve_root(environment_root, "environment"), project_id, None)
+    A root-only binding permits bounded project discovery by the caller; it
+    does not select a default project or authorize a project-scoped operation.
+    """
+    project_id = _validate_explicit_project(explicit_project)
+    selected_root = None
+    if explicit_root is not None:
+        selected_root = _resolve_root(explicit_root, "explicit")
+    elif env.get("OBSIDIAN_AGENT_MEMORY_ROOT") is not None:
+        selected_root = _resolve_root(env["OBSIDIAN_AGENT_MEMORY_ROOT"], "environment")
 
     if config_path is None:
+        if selected_root is not None:
+            return RootBinding(selected_root, project_id, None)
         raise ConfigurationError("missing configuration binding")
-    config = load_local_config(config_path)
+    try:
+        config = load_local_config(config_path)
+    except ConfigurationError as error:
+        # A selected platform registry location need not have been configured.
+        # Only absence is optional; malformed/unreadable configuration fails.
+        if selected_root is not None and isinstance(error.__cause__, FileNotFoundError):
+            return RootBinding(selected_root, project_id, None)
+        raise
     bindings = config["bindings"]
+    if selected_root is not None:
+        bindings = [
+            binding for binding in bindings
+            if _normalise_path(binding["memory_root"]) == _normalise_path(selected_root)
+        ]
+        selected_vault = _vault_for_root(bindings, selected_root)
+        if project_id is not None:
+            return RootBinding(selected_root, project_id, selected_vault)
     workspace_matches = [binding for binding in bindings if _is_workspace_ancestor(binding["workspace"], cwd)]
     if workspace_matches:
         longest_length = max(len(_normalise_path(binding["workspace"])) for binding in workspace_matches)
@@ -231,6 +269,8 @@ def resolve_binding(
         cwd_name = Path(cwd).name
         project_matches = [binding for binding in bindings if binding["project_id"] == cwd_name]
         if not project_matches:
+            if selected_root is not None:
+                return RootBinding(selected_root, None, selected_vault)
             raise ConfigurationError("missing configuration binding")
         if len(project_matches) != 1:
             raise ConfigurationError("ambiguous configuration binding")
@@ -239,5 +279,5 @@ def resolve_binding(
     return RootBinding(
         selected["memory_root"],
         project_id if project_id is not None else selected["project_id"],
-        selected["obsidian_vault"],
+        _vault_for_root(bindings, selected["memory_root"]),
     )

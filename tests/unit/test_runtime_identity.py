@@ -82,7 +82,7 @@ class RuntimeIdentityTests(unittest.TestCase):
                 )
 
     def test_default_installed_identity_binds_manifest_and_managed_bytes(self):
-        for version in ("2.0.0", "2.0.1"):
+        for version in ("2.0.0", "2.0.2"):
             with self.subTest(version=version):
                 self._check_installed_identity(version)
 

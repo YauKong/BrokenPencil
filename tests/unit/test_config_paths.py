@@ -18,6 +18,7 @@ from obsidian_agent_memory import (  # noqa: E402
     resolve_binding,
     resolve_inside,
     select_local_config_path,
+    select_read_adapter,
     validate_identifier,
 )
 
@@ -196,6 +197,217 @@ class ConfigurationTests(unittest.TestCase):
             binding = resolve_binding(None, None, {}, config_path, cwd)
 
             self.assertEqual(RootBinding(inner_memory.resolve(), "inner", "inner-vault"), binding)
+
+    def test_known_root_still_resolves_same_root_workspace_project(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            root = base / "memory"
+            workspace = base / "workspace"
+            config = self._write_config(base, [self._binding(workspace, root)])
+            for source in ("explicit", "environment"):
+                with self.subTest(source=source):
+                    binding = resolve_binding(
+                        root if source == "explicit" else None, None,
+                        {"OBSIDIAN_AGENT_MEMORY_ROOT": str(root)}, config,
+                        workspace / "src",
+                    )
+                    self.assertEqual(RootBinding(root.resolve(), "demo", "portable-demo"), binding)
+
+    def test_known_root_filters_other_roots_before_longest_workspace_match(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            root = base / "memory"
+            workspace = base / "workspace"
+            config = self._write_config(base, [
+                self._binding(workspace, root, "outer"),
+                self._binding(workspace / "component", root, "inner"),
+                self._binding(workspace / "component" / "src", base / "other", "wrong"),
+            ])
+            binding = resolve_binding(root, None, {}, config, workspace / "component" / "src")
+            self.assertEqual("inner", binding.project_id)
+            self.assertEqual(root.resolve(), binding.memory_root)
+
+    def test_known_root_uses_unique_same_root_configured_basename_hint(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            root = base / "memory"
+            config = self._write_config(base, [
+                self._binding(base / "one", root),
+                self._binding(base / "two", base / "other"),
+            ])
+            self.assertEqual("demo", resolve_binding(root, None, {}, config, base / "demo").project_id)
+
+    def test_known_root_rejects_ambiguous_same_root_basename_hint(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            root = base / "memory"
+            config = self._write_config(base, [
+                self._binding(base / "one", root),
+                self._binding(base / "two", root),
+            ])
+            with self.assertRaisesRegex(ConfigurationError, "ambiguous"):
+                resolve_binding(root, None, {}, config, base / "demo")
+
+    def test_known_root_does_not_adopt_another_roots_project_or_vault(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            root = base / "memory"
+            config = self._write_config(base, [self._binding(base, base / "other")])
+            self.assertEqual(RootBinding(root.resolve(), None, None), resolve_binding(root, None, {}, config, base))
+
+    def test_known_root_without_matching_config_remains_available_for_discovery(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            root = base / "memory"
+            config = self._write_config(base, [self._binding(base / "unrelated", root)])
+            for path in (None, base / "absent.json", config):
+                with self.subTest(config=path):
+                    self.assertEqual(
+                        RootBinding(root.resolve(), None, "portable-demo" if path == config else None),
+                        resolve_binding(None, None, {"OBSIDIAN_AGENT_MEMORY_ROOT": str(root)}, path, base / "chat"),
+                    )
+
+    def test_known_root_rejects_malformed_selected_config_when_resolving_project(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            config = base / "invalid.json"
+            config.write_text("{", encoding="utf-8")
+            with self.assertRaises(ConfigurationError):
+                resolve_binding(base / "memory", None, {}, config, base)
+
+    def test_complete_explicit_binding_rejects_malformed_selected_config(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            config = base / "invalid.json"
+            config.write_text("{", encoding="utf-8")
+            with self.assertRaises(ConfigurationError):
+                resolve_binding(base / "memory", "chosen", {}, config, base)
+
+    def test_vault_names_preserve_display_text_instead_of_using_project_id_rules(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            for vault in ("AgentMemory", "My Vault", "项目记忆"):
+                with self.subTest(vault=vault):
+                    config = self._write_config(base, [self._binding(base, base / "memory", obsidian_vault=vault)])
+                    self.assertEqual(vault, load_local_config(config)["bindings"][0]["obsidian_vault"])
+            for vault in ("", "  ", "a\nb", "a\x00b", "a\x7fb", 12):
+                with self.subTest(invalid=vault):
+                    config = self._write_config(base, [self._binding(base, base / "memory", obsidian_vault=vault)])
+                    with self.assertRaises(ConfigurationError):
+                        load_local_config(config)
+
+    def test_explicit_rebinding_retains_unique_same_root_vault(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            root = base / "memory"
+            config = self._write_config(base, [
+                self._binding(base / "work", root, "demo", "named-vault"),
+                self._binding(base / "other", base / "other-root", "elsewhere", "other-vault"),
+            ])
+            for explicit, env in ((root, {}), (None, {"OBSIDIAN_AGENT_MEMORY_ROOT": str(root)})):
+                with self.subTest(explicit=explicit):
+                    result = resolve_binding(explicit, "chosen", env, config, base / "new-chat")
+                    self.assertEqual(RootBinding(root.resolve(), "chosen", "named-vault"), result)
+
+    def test_root_only_discovery_retains_vault_without_inventing_project(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            root = base / "memory"
+            config = self._write_config(base, [self._binding(base / "unrelated", root)])
+            result = resolve_binding(root, None, {}, config, base / "new-chat")
+            self.assertEqual(RootBinding(root.resolve(), None, "portable-demo"), result)
+
+    def test_root_only_config_can_bind_vault_without_assigning_a_project(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            root = base / "memory"
+            config = self._write_config(base, [self._binding(base, root, None, "AgentMemory")])
+            self.assertEqual(RootBinding(root.resolve(), None, "AgentMemory"), resolve_binding(None, None, {}, config, base))
+            self.assertEqual(RootBinding(root.resolve(), "chosen", "AgentMemory"), resolve_binding(root, "chosen", {}, config, base))
+
+    def test_explicit_rebinding_refuses_conflicting_same_root_vaults(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            root = base / "memory"
+            config = self._write_config(base, [
+                self._binding(base / "one", root, "one", "first"),
+                self._binding(base / "two", root, "two", "second"),
+            ])
+            with self.assertRaises(ConfigurationError):
+                resolve_binding(root, "chosen", {}, config, base)
+
+    def test_inferred_project_inherits_unique_vault_from_root_only_binding(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            root = base / "memory"
+            config = self._write_config(base, [
+                self._binding(base, root, None, "AgentMemory"),
+                self._binding(base / "work", root, "demo", None),
+            ])
+            for explicit_root in (None, root):
+                with self.subTest(root=explicit_root):
+                    self.assertEqual(RootBinding(root.resolve(), "demo", "AgentMemory"), resolve_binding(explicit_root, None, {}, config, base / "work"))
+
+    def test_environment_root_and_platform_registry_select_project_in_fresh_context(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            root = base / "memory"
+            workspace = base / "workspace"
+            registry_directory = base / "appdata" / "obsidian-agent-memory"
+            registry_directory.mkdir(parents=True)
+            self._write_config(registry_directory, [self._binding(workspace, root)])
+            env = {"OBSIDIAN_AGENT_MEMORY_ROOT": str(root), "APPDATA": str(base / "appdata")}
+            selected_config = select_local_config_path(None, "win32", env)
+            self.assertEqual(
+                RootBinding(root.resolve(), "demo", "portable-demo"),
+                resolve_binding(None, None, env, selected_config, workspace / "src"),
+            )
+
+    def test_root_only_adapter_discovery_can_be_rebound_without_writes(self):
+        fixture = Path(__file__).resolve().parents[1] / "fixtures" / "vaults" / "v2-clean"
+        before = {path.relative_to(fixture): path.read_bytes() for path in fixture.rglob("*") if path.is_file()}
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            env = {"OBSIDIAN_AGENT_MEMORY_ROOT": str(fixture)}
+            binding = resolve_binding(None, None, env, base / "absent.json", base / "chat")
+
+            def unexpected_cli(arguments, timeout):
+                raise AssertionError("a root without a vault must not launch a CLI")
+
+            selection = select_read_adapter(binding, unexpected_cli, executable=base / "optional-cli")
+            self.assertEqual("filesystem", selection.mode)
+            self.assertEqual("cli-vault-missing", selection.reason)
+            paths = selection.adapter.files("projects", limit=200)
+            self.assertIn("projects/demo/overview.md", paths)
+            self.assertTrue(selection.adapter.read("projects/demo/overview.md"))
+            # The caller supplies its reviewed choice, not a runtime default.
+            chosen = resolve_binding(binding.memory_root, "demo", {}, None, base / "chat")
+            self.assertEqual("demo", chosen.project_id)
+            self.assertEqual(fixture.resolve(), chosen.memory_root)
+        after = {path.relative_to(fixture): path.read_bytes() for path in fixture.rglob("*") if path.is_file()}
+        self.assertEqual(before, after)
+
+    def test_explicit_root_project_resolution_ignores_conflicting_environment_root(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            root = base / "chosen-memory"
+            config = self._write_config(base, [self._binding(base, root, "chosen")])
+            binding = resolve_binding(root, None, {"OBSIDIAN_AGENT_MEMORY_ROOT": str(base / "other")}, config, base)
+            self.assertEqual(RootBinding(root.resolve(), "chosen", "portable-demo"), binding)
+
+    def test_known_root_matching_normalizes_lexical_path_components(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            root = base / "memory"
+            config = self._write_config(base, [self._binding(base, root / "nested" / "..")])
+            binding = resolve_binding(root, None, {}, config, base)
+            self.assertEqual("demo", binding.project_id)
+
+    def test_unreadable_selected_config_is_not_treated_as_absent_registry(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory)
+            with self.assertRaises(ConfigurationError):
+                resolve_binding(base / "memory", None, {}, base, base)
 
     def test_explicit_project_only_changes_project_selection(self):
         with tempfile.TemporaryDirectory() as temporary_directory:

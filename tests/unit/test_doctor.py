@@ -343,7 +343,7 @@ class BootstrapCommandTests(unittest.TestCase):
             )
             self.assertEqual(0, applied.returncode, applied.stdout)
             self.assertEqual(
-                "INSTALLED version=2.0.1 transaction=bootstrap-install-001 rollback-retained=true\n",
+                "INSTALLED version=2.0.2 transaction=bootstrap-install-001 rollback-retained=true\n",
                 applied.stdout,
             )
 

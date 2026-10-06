@@ -476,14 +476,14 @@ class ReleaseCliTests(unittest.TestCase):
             self.assertEqual(0, built.returncode, built.stdout)
             self.assertRegex(
                 built.stdout,
-                r"^BUILT obsidian-agent-memory-skill-pack-2\.0\.1\.zip "
-                r"obsidian-agent-memory-skill-pack-2\.0\.1\.zip\.sha256 "
-                r"obsidian-agent-memory-skill-pack-2\.0\.1-manifest\.json "
+                r"^BUILT obsidian-agent-memory-skill-pack-2\.0\.2\.zip "
+                r"obsidian-agent-memory-skill-pack-2\.0\.2\.zip\.sha256 "
+                r"obsidian-agent-memory-skill-pack-2\.0\.2-manifest\.json "
                 r"sha256=[0-9a-f]{64}\n$",
             )
-            archive = output / "obsidian-agent-memory-skill-pack-2.0.1.zip"
-            checksum = output / "obsidian-agent-memory-skill-pack-2.0.1.zip.sha256"
-            manifest = output / "obsidian-agent-memory-skill-pack-2.0.1-manifest.json"
+            archive = output / "obsidian-agent-memory-skill-pack-2.0.2.zip"
+            checksum = output / "obsidian-agent-memory-skill-pack-2.0.2.zip.sha256"
+            manifest = output / "obsidian-agent-memory-skill-pack-2.0.2-manifest.json"
             verified = self.run_command(
                 [
                     "tools/verify_release.py",
@@ -498,7 +498,7 @@ class ReleaseCliTests(unittest.TestCase):
             self.assertEqual(0, verified.returncode, verified.stdout)
             self.assertRegex(
                 verified.stdout,
-                r"^VERIFIED obsidian-agent-memory-skill-pack 2\.0\.1 "
+                r"^VERIFIED obsidian-agent-memory-skill-pack 2\.0\.2 "
                 r"sha256=[0-9a-f]{64}\n$",
             )
 

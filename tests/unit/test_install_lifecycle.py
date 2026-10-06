@@ -30,7 +30,7 @@ from tools.agent_memory_pack import lifecycle as pack_lifecycle
 
 
 PACK_NAME = "obsidian-agent-memory-skill-pack"
-PACK_VERSION = "2.0.1"
+PACK_VERSION = "2.0.2"
 PLANNED_AT = "2026-08-30T05:00:00Z"
 
 
@@ -1116,7 +1116,7 @@ class InstallPlanCliTests(unittest.TestCase):
             )
             self.assertEqual(0, applied.returncode, applied.stdout)
             self.assertEqual(
-                "INSTALLED version=2.0.1 transaction=pack-plan-001 rollback-retained=true\n",
+                "INSTALLED version=2.0.2 transaction=pack-plan-001 rollback-retained=true\n",
                 applied.stdout,
             )
 

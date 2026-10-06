@@ -45,9 +45,9 @@ REMOVED_MEMBERS = (_REMOVED_WRITER,)
 REQUIRED_CAPABILITIES = ()
 OPTIONAL_CAPABILITIES = ("obsidian-cli", "obsidian-knowledge-base")
 _PACK_NAME = "obsidian-agent-memory-skill-pack"
-_VERSION = "2.0.1"
+_VERSION = "2.0.2"
 # Persisted plans and rollback state from the preceding release remain readable.
-SUPPORTED_LIFECYCLE_VERSIONS = ("2.0.0", _VERSION)
+SUPPORTED_LIFECYCLE_VERSIONS = ("2.0.0", "2.0.1", _VERSION)
 _MINIMUM_PYTHON = "3.9"
 _SCHEMA_VERSIONS = (1, 2)
 _RELEASE_ARCHIVE = "obsidian-agent-memory-skill-pack-" + _VERSION + ".zip"

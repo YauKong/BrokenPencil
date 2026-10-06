@@ -82,7 +82,7 @@ class UninstallPlanningTests(unittest.TestCase):
             self.assertEqual("uninstall", plan.operation)
             self.assertEqual("workstation-operator", plan.actor)
             self.assertEqual(PLANNED_AT, plan.occurred_at)
-            self.assertEqual("2.0.1", plan.from_version)
+            self.assertEqual("2.0.2", plan.from_version)
             self.assertIsNone(plan.to_version)
             self.assertIsNone(plan.source)
             self.assertIsNone(plan.source_revision)
@@ -234,7 +234,7 @@ class UninstallApplyRollbackTests(unittest.TestCase):
                 "uninstall-rollback-001",
             )
             self.assertEqual("rolled-back", rolled_back.status)
-            self.assertEqual("2.0.1", rolled_back.version)
+            self.assertEqual("2.0.2", rolled_back.version)
             self.assertEqual(installed_before, (selection.state_root / "installed.json").read_bytes())
             self.assertEqual("keep me\n", sentinel.read_text(encoding="utf-8"))
             for member in ACTIVE_MEMBERS:

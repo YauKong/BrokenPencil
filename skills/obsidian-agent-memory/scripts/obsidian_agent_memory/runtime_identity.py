@@ -169,7 +169,7 @@ def _installed_identity(module_path, env, cache_digest):
         raise ValidationError("invalid installed state")
     if (
         document["pack_name"] != "obsidian-agent-memory-skill-pack"
-        or document["pack_version"] not in ("2.0.0", "2.0.1")
+        or document["pack_version"] not in ("2.0.0", "2.0.1", "2.0.2")
     ):
         raise ValidationError("invalid installed pack identity")
     if document["skills_root"] != str(skills_root) or document["target_digest"] != target_digest:
